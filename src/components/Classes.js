@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EditClass() {
+export default function Classes() {
 
   return (
     <div></div>
