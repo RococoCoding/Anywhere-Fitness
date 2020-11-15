@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-    Loading...
+    {/* Loading... */}
       <Login></Login>
     </div>
   );
