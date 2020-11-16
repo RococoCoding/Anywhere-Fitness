@@ -26,10 +26,11 @@ const Login  = () => {
             .reach(schema, evt.target.name)
             .validate(correctValue)
             .then((res) => {
-                setErrors({...values, [evt.target.name] : ""})
-                console.log(res)
+                setErrors({...errors, [evt.target.name] : ""})
+                // console.log(res)
             })
             .catch((err) => {
+                console.log(err)
                 setErrors({...errors,[evt.target.name] : err.message})
             })
         }
