@@ -1,4 +1,4 @@
-import { ADD_CLASS, SEARCH_CLASS } from "../actions/classActions";
+import { ADD_CLASS, SEARCH_CLASS, SET_EDIT } from "../actions/classActions";
 
 // const initialState = {
 //   classID: 0, 
@@ -21,6 +21,8 @@ const classReducer = (state = initialState, action) => {
     case ADD_CLASS:
       return state
     case SEARCH_CLASS:
+      return action.payload;
+    case SET_EDIT:
       return action.payload;
     default: return state;
   }

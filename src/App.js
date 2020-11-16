@@ -2,6 +2,7 @@ import './App.css';
 import Dashboard from "./components/Dashboard";
 import { Link, Route } from "react-router-dom";
 import SearchResults from "./components/SearchResults";
+import EditClass from './components/EditClass';
 
 function App() {
   return (
@@ -14,8 +15,11 @@ function App() {
       <Route path="/protected">
         <Dashboard />
       </Route>
-      <Route path="/searchResults">
+      <Route path="/search-results">
         <SearchResults />
+      </Route>
+      <Route path="/edit-class">
+        <EditClass />
       </Route>
     </div>
   );
