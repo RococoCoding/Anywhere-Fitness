@@ -7,7 +7,7 @@ import CreateClass from "./CreateClass";
 import SearchClass from "./SearchClass";
 
 export default function Onboarding() {
-  const user = useSelector(rootStates => rootStates.userReducer)
+  const user = useSelector(rootStates => rootStates.userReducer);
   const dispatch = useDispatch();
   const { push } = useHistory();
 

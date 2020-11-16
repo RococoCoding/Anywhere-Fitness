@@ -1,8 +1,7 @@
-import {ADD_CLASS} from "../actions/classActions";
-import {SEARCH_CLASS} from "../actions/classActions";
+import { ADD_CLASS, SEARCH_CLASS } from "../actions/classActions";
 
 // const initialState = {
-//   classID: 0,
+//   classID: 0, 
 //   name: "",
 //   type: "",
 //   date: 0,
