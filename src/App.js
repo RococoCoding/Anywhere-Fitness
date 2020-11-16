@@ -3,6 +3,7 @@ import Dashboard from "./components/Dashboard";
 import { Link, Route } from "react-router-dom";
 import SearchResults from "./components/SearchResults";
 import EditClass from './components/EditClass';
+import CreateClass from './components/CreateClass';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/edit-class">
         <EditClass />
       </Route>
+      <CreateClass/>
     </div>
   );
 }
