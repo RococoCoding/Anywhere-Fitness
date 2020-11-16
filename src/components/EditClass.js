@@ -1,35 +1,36 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
-export default function EditClass(props) { 
-  const {editClass, classToEdit, display} = props;
-  const user = useSelector(rootStates => rootStates.userReducer);
+import { editClassAction } from "../actions/userActions"; 
+
+export default function EditClass() { 
+  const classToEdit = useSelector(state => state.classReducer);
+  const dispatch = useDispatch();
   const { push } = useHistory();
 
-  let initialInput = {
-    name: classToEdit.name,
-    type: classToEdit.type,
-    date: classToEdit.date,
-    startTime: classToEdit.startTime,
-    duration: classToEdit.duration,
-    intensity: classToEdit.intensity,
-    location: classToEdit.location,
-    max: classToEdit.max,
-  }
+  const initialInput = {...classToEdit}
 
   const [input, setInput] = useState(initialInput);
+
   function changeHandler(e) {
     setInput({...input, [e.target.name]: e.target.value})
   }
 
+  function editClass(e) {
+    e.preventDefault();
+    dispatch(editClassAction(input));
+    push("/protected");
+  }
+
   return (
-    <form className={display ? "" : "hide"} onSubmit={(e) => editClass(e, input)}>
+    <form onSubmit={(e) => editClass(e, input)}>
       <label htmlFor="name">Name:
         <input
           type="text"
           id="name"
+          name="name"
           value={input.name}
           onChange={changeHandler}
         />
@@ -39,6 +40,7 @@ export default function EditClass(props) {
         <select
           type="dropdown"
           id="type"
+          name="type"
           value={input.type}
           onChange={changeHandler}
         >
@@ -53,6 +55,7 @@ export default function EditClass(props) {
       <label htmlFor="date">Date:
         <input
           type="date"
+          id="date"
           name="date"
           value={input.date}
           onChange={changeHandler}
@@ -63,6 +66,7 @@ export default function EditClass(props) {
         <input
           type="time"
           id="startTime"
+          name="startTime"
           value={input.startTime}
           onChange={changeHandler}
         />
@@ -72,6 +76,7 @@ export default function EditClass(props) {
         <select
           type="dropdown"
           id="duration"
+          name="duration"
           value={input.duration}
           onChange={changeHandler}
         >
@@ -86,6 +91,7 @@ export default function EditClass(props) {
         <select
           type="dropdown"
           id="intensity"
+          name="intensity"
           value={input.intensity}
           onChange={changeHandler}
         >
@@ -100,6 +106,7 @@ export default function EditClass(props) {
         <input
           type="number"
           id="max"
+          name="max"
           value={input.max}
           onChange={changeHandler}
         />

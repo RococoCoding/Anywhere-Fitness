@@ -20,6 +20,9 @@ export default function Dashboard() {
      return (
       <div>
         Dashboard
+        <nav>
+          {/* links to create/add classes, profile */}
+        </nav>
         <ClassList />
       </div>
     );
