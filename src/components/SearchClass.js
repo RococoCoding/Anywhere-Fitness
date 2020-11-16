@@ -14,7 +14,7 @@ const initialState = {
   location: "any",
 };
 
-const initialResults = [];
+// const initialResults = [];
 
 const mockRes = [
   {
@@ -73,8 +73,7 @@ const mockRes = [
 
 export default function SearchClass() {
   const [input, setInput] = useState(initialState);
-  const [results, setResults] = useState(initialResults);
-
+  // const [results, setResults] = useState(initialResults);
 
   const dispatch = useDispatch()
 
@@ -84,7 +83,7 @@ export default function SearchClass() {
     setInput({...input, [e.target.name]: e.target.value})
   }; 
 
-  function filterReseults() {
+  function filterResults() {
     let inputCopy = {...input};
     for (let i in inputCopy) {
       if (inputCopy[i] === "any") {
@@ -110,7 +109,7 @@ export default function SearchClass() {
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err));
     // delete input[keys[0]];
-    dispatch(searchClass(filterReseults()))
+    dispatch(searchClass(filterResults()))
     push("/searchResults");
   };
 
