@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Axios from "axios";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 import Onboarding from "./Onboarding";
 import ClassList from "./ClassList";
 
-//dashboard gets user data from userreducer
-//if user does not have any classes, will display onboard
-
 export default function Dashboard() {
-  const user = useSelector(rootStates => rootStates.userReducer)
-
+  const user = useSelector(rootStates => rootStates.userReducer);
+  // Axios.get()
   if (!user.classes) {
     return (
       <Onboarding />

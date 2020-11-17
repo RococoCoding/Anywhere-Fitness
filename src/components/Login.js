@@ -2,7 +2,11 @@ import React, {useState} from "react";
 import * as yup from "yup";
 import schema from "./validation/loginSchema"
 import Styled from "styled-components";
+import Axios from "axios";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
+import { saveRole } from "../actions/userActions";
 
 
 const initialValues = {
@@ -18,6 +22,8 @@ const initialErrors = {
 const Login  = () => {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState(initialErrors);
+    const { push } = useHistory();
+    const dispatch = useDispatch();
     
     const Change = (evt) => {
         const correctValue = evt.target.value;
@@ -30,7 +36,6 @@ const Login  = () => {
                 // console.log(res)
             })
             .catch((err) => {
-                console.log(err)
                 setErrors({...errors,[evt.target.name] : err.message})
             })
         }
@@ -40,6 +45,14 @@ const Login  = () => {
 
     const submit = (evt) => {
         evt.preventDefault();
+        Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
+            .then(res => {
+                console.log(res.data)
+                localStorage.setItem("token", res.data.token);
+                dispatch(saveRole(res.data.role))
+                push("/protected");
+            })
+            .catch(err => console.log(err))
     }
 
     return(
