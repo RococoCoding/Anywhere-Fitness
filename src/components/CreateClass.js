@@ -3,43 +3,46 @@ import {useState} from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import axios from 'axios';
-// will this work?
+
 export default function CreateClass() {
   const initialValues = {
     name:'',
+    instructor_name: '',
     type:'',
-    startTime:'',
+    // startTime:'',
     duration:'',
-    intensityLevel:'',
+    intensity:'',
     location:'',
-    CurrentRegisteredAttendees:'',
-    maxClassSize:'',
+    date: '',
+    // CurrentRegisteredAttendees:'',
+    max_size:'',
   }
 
   const initialFormErrors = {
     name:'',
+    instructor_name: '',
     type:'',
-    startTime:'',
+    date: '',
+    // startTime:'',
     duration:'',
-    intensityLevel:'',
+    intensity:'',
     location:'',
-    CurrentRegisteredAttendees:'',
-    maxClassSize:'',
+    max_size:'',
   }
 
-  const [ values , setValues] = useState(initialValues);
-  const[errors, setErrors] = useState(initialFormErrors);
+  const [values , setValues] = useState(initialValues);
+  const [errors, setErrors] = useState(initialFormErrors);
 
   function changeValues(e){
     e.persist();
-    const correctValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const correctValue = e.target.value;
     
         function validate (){
             yup
             .reach(schema,e.target.name)
             .validate(correctValue)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 setErrors({...errors,[e.target.name]:''})
             })
             .catch((err) =>{
@@ -52,10 +55,11 @@ export default function CreateClass() {
         setValues({...values,[e.target.name]:correctValue})
     }
       function submitForm(e){
-        e.preventDefault()
-        console.log(values);
+        e.preventDefault();
+        let raw= JSON.stringify(values)
+        console.log(raw)
         axios
-        .post('url',values)
+        .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', raw)
         .then((res) =>{
           console.log(res);
           setValues(initialValues); 
@@ -80,6 +84,15 @@ export default function CreateClass() {
           
         />
       </label>
+      <label htmlFor="instructor_name"> Instructor Name
+        <input 
+        type='text' 
+        name='instructor_name'  
+        value={values.instructor_name}
+        onChange={changeValues}
+          
+        />
+      </label>
       <label htmlFor="type"> Type
       <select  name="type" value={values.type} onChange={changeValues} >
             <option value="">- Select an option -</option>
@@ -90,7 +103,17 @@ export default function CreateClass() {
           </select>
       </label>
       {errors.type ? `${errors.type}`   : ""}
-      <label htmlFor="startTime">Start Time
+
+      <label htmlFor="date">
+        <input 
+          type="date"
+          name="date"
+          value={values.date}
+          onChange={changeValues}
+        />
+      </label>
+      
+      {/* <label htmlFor="startTime">Start Time
         <input 
         type='time' 
         name='startTime' 
@@ -98,7 +121,7 @@ export default function CreateClass() {
         onChange={changeValues}
           
         />
-      </label>
+      </label> */}
       <label htmlFor="duration">Duration
       <select  name="duration" value={values.duration} onChange={changeValues}>
             <option value="">- Select an option -</option>
@@ -108,8 +131,8 @@ export default function CreateClass() {
             <option value="2 hours">2 hours</option>
           </select>
       </label>
-      <label htmlFor="intensityLevel">Intensity level
-      <select  name="intensityLevel" value={values.intensityLevel} onChange={changeValues}>
+      <label htmlFor="intensity">Intensity level
+      <select  name="intensity" value={values.intensity} onChange={changeValues}>
             <option value="">- Select an option -</option>
             <option value="low">Low</option>
             <option value="medium">Medium </option>
@@ -125,7 +148,7 @@ export default function CreateClass() {
           
         />
       </label>
-      <label htmlFor="CurrentRegisteredAttendees">Current number of registered attendees
+      {/* <label htmlFor="CurrentRegisteredAttendees">Current number of registered attendees
         <input 
         type='number'
         name= 'CurrentRegisteredAttendees'
@@ -133,12 +156,12 @@ export default function CreateClass() {
         onChange={changeValues}
           
         />
-      </label>
-      <label htmlFor="maxClassSize">Max class size
+      </label> */}
+      <label htmlFor="max_size">Max class size
         <input 
         type='number'
-        name='maxClassSize'
-        value={values.maxClassSize}
+        name='max_size'
+        value={values.max_size}
         onChange={changeValues}
           
         />
