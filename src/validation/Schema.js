@@ -11,16 +11,16 @@ export default yup.object().shape({
     .min(1,'please pick a type of class'),
     date: yup
     .string(),
-    // startTime: yup
-    // .string(),
+    start_time: yup
+    .string(),
     duration: yup
     .string(),
     intensity: yup
     .string(),
     location: yup
     .string(),
-    // CurrentRegisteredAttendees: yup
-    // .number(),
+    number_attendees: yup
+    .number(),
     max_size: yup
     .string(),
   

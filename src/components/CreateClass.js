@@ -3,18 +3,20 @@ import {useState} from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import axios from 'axios';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+
 
 export default function CreateClass() {
   const initialValues = {
     name:'',
     instructor_name: '',
     type:'',
-    // startTime:'',
+    start_time:'',
     duration:'',
     intensity:'',
     location:'',
     date: '',
-    // CurrentRegisteredAttendees:'',
+    number_attendees:'',
     max_size:'',
   }
 
@@ -23,11 +25,12 @@ export default function CreateClass() {
     instructor_name: '',
     type:'',
     date: '',
-    // startTime:'',
+    start_time:'',
     duration:'',
     intensity:'',
     location:'',
     max_size:'',
+    number_attendees:'',
   }
 
   const [values , setValues] = useState(initialValues);
@@ -56,19 +59,30 @@ export default function CreateClass() {
     }
       function submitForm(e){
         e.preventDefault();
-        let raw= JSON.stringify(values)
-        console.log(raw)
-        axios
-        .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', raw)
-        .then((res) =>{
-          console.log(res);
-          setValues(initialValues); 
-        })
-        .catch((err)=>{
-          console.log(err);
-        })
-
-        
+        // let raw = JSON.stringify(values)
+        // console.log(values)
+        let temp = {
+          date: "2020-11-18",
+          duration: "30 minutes",
+          instructor_name: "Alice",
+          intensity: "low",
+          location: "Brooklyn",
+          max_size: "10",
+          name: "spin master deluxe",
+          type: "Spin",
+          number_attendees: "1",
+          start_time: "12:00"
+        }
+        console.log(temp)
+        axiosWithAuth()
+          .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', temp)
+          .then((res) =>{
+            console.log(res);
+            setValues(initialValues); 
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
       }
 
 
@@ -113,15 +127,15 @@ export default function CreateClass() {
         />
       </label>
       
-      {/* <label htmlFor="startTime">Start Time
+      <label htmlFor="start_time">Start Time
         <input 
         type='time' 
-        name='startTime' 
-        value={values.startTime}
+        name='start_time' 
+        value={values.start_time}
         onChange={changeValues}
           
         />
-      </label> */}
+      </label>
       <label htmlFor="duration">Duration
       <select  name="duration" value={values.duration} onChange={changeValues}>
             <option value="">- Select an option -</option>
@@ -148,15 +162,15 @@ export default function CreateClass() {
           
         />
       </label>
-      {/* <label htmlFor="CurrentRegisteredAttendees">Current number of registered attendees
+      <label htmlFor="number_attendees">Current number of registered attendees
         <input 
         type='number'
-        name= 'CurrentRegisteredAttendees'
-        value={values.CurrentRegisteredAttendees}
+        name= 'number_attendees'
+        value={values.number_attendees}
         onChange={changeValues}
           
         />
-      </label> */}
+      </label>
       <label htmlFor="max_size">Max class size
         <input 
         type='number'
