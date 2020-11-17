@@ -3,7 +3,7 @@ import {useState} from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import axios from 'axios';
-// testinsdfsdg conflicts
+
 export default function CreateClass() {
   const initialValues = {
     name:'',
