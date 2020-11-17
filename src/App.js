@@ -7,12 +7,13 @@ import EditClass from './components/EditClass';
 import CreateClass from './components/CreateClass';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  
+  // localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoic2lubmVyIiwicm9sZSI6Imluc3RydWN0b3IiLCJpYXQiOjE2MDU2NDI4MTEsImV4cCI6MTYwNTcyOTIxMX0.He3yuqNO0jEzqOM8oeqWGx3-j_TXmJao9aWeEKS8ilI")
   return  (
     <Route 
       {...rest}
       render={props => {
         let token = localStorage.getItem('token')
-        console.log(token)
         if (token) {
           return <Component {...props} />
         } else {
