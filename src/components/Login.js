@@ -47,7 +47,7 @@ const Login  = () => {
     const submit = (evt) => {
         evt.preventDefault();
         // Axios.post("http://anytime-fitness.herokuapp.com/api/auth/login", values)
-        axiosWithAuth().post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
+        Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
             .then(res => {
                 console.log(res.data)
                 // localStorage.setItem("token", res.data.token);
