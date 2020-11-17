@@ -27,7 +27,6 @@ export default function CreateClass() {
     duration:'',
     intensity:'',
     location:'',
-    // CurrentRegisteredAttendees:'',
     max_size:'',
   }
 
