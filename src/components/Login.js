@@ -38,12 +38,15 @@ const Login  = () => {
         setValues({...values,[evt.target.name] : correctValue});
     }
 
+    const submit = (evt) => {
+        evt.preventDefault();
+    }
 
     return(
         
         <ContainerDiv>
             <TopDiv>hello</TopDiv>
-        <StyledForm className="logIn-container">
+        <StyledForm className="logIn-container" onSubmit={submit}>
             <StyledLabel>
                 <StyledInput 
                 type="text" 
@@ -66,7 +69,7 @@ const Login  = () => {
             </StyledLabel>
             {errors.password ? <div>{errors.password}</div> : ""}
             <br/>
-            <StyleButton className="logInBtn">Login</StyleButton>
+            <StyleButton id="logInBtn" >Login</StyleButton>
         </StyledForm>
         </ContainerDiv>
     );
