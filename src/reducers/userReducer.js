@@ -1,3 +1,4 @@
+
 import { UPDATE_CLASS_LIST, SKIP_ONBOARDING, ADD_USER, DELETE_CLASS, EDIT_CLASS, SAVE_USER } from "../actions/userActions";
 import Axios from "axios";
 
@@ -6,8 +7,6 @@ id: 0,
 username: "",
 password: "",
 email: "",
-classes: "",
-role: ""
 };
 
 const userReducer = (state = initialState, action) => {

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import * as yup from "yup";
 import schema from "./validation/loginSchema"
 import Styled from "styled-components";
+
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -20,6 +21,7 @@ const initialErrors = {
 const Login  = () => {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState(initialErrors);
+
     const { push } = useHistory();
     const dispatch = useDispatch();
     
@@ -34,6 +36,7 @@ const Login  = () => {
                 // console.log(res)
             })
             .catch((err) => {
+
                 setErrors({...errors,[evt.target.name] : err.message})
             })
         }

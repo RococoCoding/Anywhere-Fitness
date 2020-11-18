@@ -6,13 +6,14 @@ import { updateClassList } from "../actions/userActions";
 
 export default function SearchResults() {
   const foundClasses = useSelector(state => state.classReducer);
-  
+
   const dispatch = useDispatch();
   const { push } = useHistory();
 
   function reserveSpot(id) { 
     // 1) adds to attendees in server class data; 
     // 2) adds class to server user data & updates user's class list via dispatch action
+
     let classToAdd = foundClasses.filter(el=>el.id === id)
     function addToAttendees(id) {
       classToAdd[0].attendees++
@@ -34,6 +35,7 @@ export default function SearchResults() {
     addToUser();
     push("/protected");
   }
+
   return (
     <div>
       {foundClasses.map((el, idx) => {

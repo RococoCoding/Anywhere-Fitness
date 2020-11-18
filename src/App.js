@@ -1,7 +1,8 @@
 import './App.css';
-import Login from "./components/Login"
+import Login from "./components/Login";
+import SignUp from "./components/Signup"
 import Dashboard from "./components/Dashboard";
-import { Link, Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import SearchResults from "./components/SearchResults";
 import EditClass from './components/EditClass';
 import CreateClass from './components/CreateClass';
@@ -36,7 +37,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <nav>
-          <Link to="/protected">Dashboard</Link>
+          <Link to="/singUp">Sing Up</Link>
+          <Link to="/login">Login</Link>
           <button onClick={logout}>Logout</button>
         </nav>
       </header>
@@ -44,7 +46,10 @@ function App() {
         <PrivateRoute path="/protected" component={Dashboard} />
         <PrivateRoute path="/search-results" component={SearchResults} />
         <PrivateRoute path="/edit-class" component={EditClass} />
-        <PrivateRoute path="/create-class" component={CreateClass} />
+        <PrivateRoute path="/create-class" component={CreateClass} />   
+        <Route path="/singUp">
+          <SignUp /> 
+        </Route>
         <Route exact path="/">
           <Login />
         </Route>

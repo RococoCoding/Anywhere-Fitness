@@ -1,3 +1,4 @@
+
 import React from "react";
 import Axios from "axios";
 import { useSelector } from "react-redux";
@@ -17,6 +18,7 @@ export default function Dashboard() {
   else {
      return (
       <div>
+
         Dashboard 
         <Link to="/create-class">Create Class</Link>
         <nav>
