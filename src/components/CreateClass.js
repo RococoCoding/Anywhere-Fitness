@@ -3,6 +3,7 @@ import { useState } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Styled from 'styled-components';
 
 
 export default function CreateClass() {
@@ -39,43 +40,66 @@ export default function CreateClass() {
     e.persist();
     const correctValue = e.target.value;
 
-    function validate() {
-      yup
-        .reach(schema, e.target.name)
-        .validate(correctValue)
-        .then((res) => {
-          // console.log(res);
-          setErrors({ ...errors, [e.target.name]: '' })
-        })
-        .catch((err) => {
-          setErrors({ ...errors, [e.target.name]: err.message })
-        })
+    // function validate() {
+    //   yup
+    //     .reach(schema, e.target.name)
+    //     .validate(correctValue)
+    //     .then((res) => {
+    //       // console.log(res);
+    //       setErrors({ ...errors, [e.target.name]: '' })
+    //     })
+    //     .catch((err) => {
+    //       setErrors({ ...errors, [e.target.name]: err.message })
+    //     })
 
-    }
-    validate();
+    // }
+    // validate();
 
     setValues({ ...values, [e.target.name]: correctValue })
   }
 
   function submitForm(e) {
     e.preventDefault();
-    axiosWithAuth()
-      .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', values)
-      .then((res) => {
-        console.log(res);
-        setValues(initialValues);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    // console.log(values);
+    
+    function validate() {
+      schema
+        .validate(values,{abortEarly:false})
+        .then((res) => {
+          console.log(res);
+          axiosWithAuth()
+                .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', values)
+                .then((res) => {
+                  console.log(res);
+                  setValues(initialValues);
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+
+          setErrors({ ...errors, [values.name]: '' })
+        })
+        .catch((err) => {
+          console.log(errors);
+          setErrors({ ...errors, [errors.name]: err.message })
+          console.log(errors);
+        })
+
+    }
+      
+    validate();
+    console.log(errors)
   }
 
 
 
-  return (
-    <form onSubmit={submitForm}>
-      <label htmlFor="name"> Name
-        <input
+  return (<div>
+    <HeaderDiv>Create Class</HeaderDiv> 
+
+    <ContainerDiv onSubmit={submitForm}>
+    
+      <label htmlFor="name"> Name:
+        <StyledInput
           type='text'
           name='name'
           value={values.name}
@@ -83,8 +107,8 @@ export default function CreateClass() {
 
         />
       </label>
-      <label htmlFor="instructor_name"> Instructor Name
-        <input
+      <label htmlFor="instructor_name"> Instructor Name:
+        <StyledInput
           type='text'
           name='instructor_name'
           value={values.instructor_name}
@@ -92,19 +116,19 @@ export default function CreateClass() {
 
         />
       </label>
-      <label htmlFor="type"> Type
-      <select name="type" value={values.type} onChange={changeValues} >
+      <label htmlFor="type"> Type:
+      <StyledSelect name="type" value={values.type} onChange={changeValues} >
           <option value="">- Select an option -</option>
           <option value="Spin">Spin</option>
           <option value="Yoga">Yoga</option>
           <option value="Martial Arts">Martial Arts</option>
           <option value="Zumba">Zumba</option>
-        </select>
+        </StyledSelect>
       </label>
-      {errors.type ? `${errors.type}` : ""}
+      {errors.type ? `${errors[0]}` : ""}
 
-      <label htmlFor="date">
-        <input
+      <label htmlFor="date"> Date of Class:
+        <StyledInput
           type="date"
           name="date"
           value={values.date}
@@ -112,8 +136,8 @@ export default function CreateClass() {
         />
       </label>
 
-      <label htmlFor="start_time">Start Time
-        <input
+      <label htmlFor="start_time">Start Time:
+        <StyledInput
           type='time'
           name='start_time'
           value={values.start_time}
@@ -121,25 +145,25 @@ export default function CreateClass() {
 
         />
       </label>
-      <label htmlFor="duration">Duration
-      <select name="duration" value={values.duration} onChange={changeValues}>
+      <label htmlFor="duration">Duration:
+      <StyledSelect name="duration" value={values.duration} onChange={changeValues}>
           <option value="">- Select an option -</option>
           <option value="30 minutes">30 minutes</option>
           <option value="1 hour">1 hour</option>
           <option value="1.5 hours">1.5 hours</option>
           <option value="2 hours">2 hours</option>
-        </select>
+        </StyledSelect>
       </label>
-      <label htmlFor="intensity">Intensity level
-      <select name="intensity" value={values.intensity} onChange={changeValues}>
+      <label htmlFor="intensity">Intensity level:
+      <StyledSelect name="intensity" value={values.intensity} onChange={changeValues}>
           <option value="">- Select an option -</option>
           <option value="low">Low</option>
           <option value="medium">Medium </option>
           <option value="high">High</option>
-        </select>
+        </StyledSelect>
       </label>
-      <label htmlFor="location">Location
-        <input
+      <label htmlFor="location">Location:
+        <StyledInput
           type='text'
           name='location'
           value={values.location}
@@ -156,8 +180,8 @@ export default function CreateClass() {
           
         />
       </label> */}
-      <label htmlFor="max_size">Max class size
-        <input
+      <label htmlFor="max_size">Max class size:
+        <StyledInput
           type='number'
           name='max_size'
           value={values.max_size}
@@ -165,7 +189,61 @@ export default function CreateClass() {
 
         />
       </label>
-      <button>Submit!</button>
-    </form>
+      <StyleButton>Submit!</StyleButton>
+    
+    </ContainerDiv>
+    </div>
   )
 }
+
+const ContainerDiv = Styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color:lightgrey;
+padding: 3%;
+padding-top: .5rem;
+font-size:1.3rem;
+text-align:center;
+
+`
+const StyledInput = Styled.input`
+padding:10px;
+border:0;
+box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+margin:10px 0px;  //add top and bottom margin
+width: 100%;
+font-size: 1.5rem;
+`
+const StyledSelect = Styled.select`
+padding:10px;
+border:0;
+box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+margin:10px 0px;  //add top and bottom margin
+width: 100%;
+font-size: 1rem;
+`
+const StyleButton = Styled.button`
+/* remove default behavior */
+appearance:none;
+-webkit-appearance:none;
+
+/* usual styles */
+align:center;
+padding:15px;
+border:none;
+background-color:#3F51B5;
+color:#fff;
+font-weight:600;
+border-radius:7px;
+width:20rem;
+`
+
+const HeaderDiv = Styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+border-bottom: solid black;
+font-size: 3rem;
+
+`
