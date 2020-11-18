@@ -6,3 +6,5 @@ todo:
 
   teach hairo about styled divs - only need top element to be styled can css within it
     and also about importing it
+
+  teaching devon about git conflicts
