@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
@@ -54,7 +53,6 @@ export default function CreateClass() {
 
     }
     validate();
-
     setValues({ ...values, [e.target.name]: correctValue })
   }
 

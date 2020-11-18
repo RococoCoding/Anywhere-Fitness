@@ -40,6 +40,7 @@ export default function SearchResults() {
     addToUser();
     push("/dashboard");
   }
+
   return (
     <div>
       {foundClasses.map((el, idx) => {

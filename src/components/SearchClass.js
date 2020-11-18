@@ -28,6 +28,7 @@ export default function SearchClass() {
     setInput({...input, [e.target.name]: e.target.value})
   }; 
 
+
   function searchSubmit(e) {
     e.preventDefault();
     dispatch(searchClass(input))

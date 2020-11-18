@@ -23,5 +23,4 @@ export default yup.object().shape({
     .number(),
     max_size: yup
     .string(),
-  
 })
