@@ -4,76 +4,21 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { searchClass } from "../actions/classActions"
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialState = {
-  type: "any",
-  time: "any",
-  date: "any",
-  duration: "any",
-  intensity: "any",
-  location: "any",
+  type: "",
+  time: "",
+  date: "",
+  duration: "",
+  intensity: "",
+  location: "",
 };
 
-// const initialResults = [];
-
-const mockRes = [
-  {
-    classID: 1,
-    name: "Spin Xtreme",
-    type: "spin",
-    date: "2020-11-17",
-    startTime: "10:00",
-    duration: "1 hour",
-    intensity: "high",
-    location: "downtown",
-    attendees: 2,
-    max: 10,
-    punchpass: 10,
-  },
-  {
-    classID: 4,
-    name: "Spin Xtreme 11",
-    type: "spin",
-    date: "2020-11-17",
-    startTime: "11:00",
-    duration: "1 hour",
-    intensity: "high",
-    location: "downtown",
-    attendees: 2,
-    max: 10,
-    punchpass: 10,
-  },
-  {
-    classID: 2,
-    name: "Yoga Master",
-    type: "yoga",
-    date: "2020-11-17",
-    startTime: "12:00",
-    duration: "1.5 hour",
-    intensity: "high",
-    location: "FiDi",
-    attendees: 10,
-    max: 10,
-    punchpass: 10,
-  },
-  {
-    classID: 3,
-    name: "Kickboxing King",
-    type: "martial arts",
-    date: "2020-11-17",
-    startTime: "11:00",
-    duration: "30 minutes",
-    intensity: "high",
-    location: "Central Park",
-    attendees: 2,
-    max: 10,
-    punchpass: 10,
-  }
-];
+const initialResults = [];
 
 export default function SearchClass() {
   const [input, setInput] = useState(initialState);
-  // const [results, setResults] = useState(initialResults);
 
   const dispatch = useDispatch()
 
@@ -83,34 +28,11 @@ export default function SearchClass() {
     setInput({...input, [e.target.name]: e.target.value})
   }; 
 
-  function filterResults() {
-    let inputCopy = {...input};
-    for (let i in inputCopy) {
-      if (inputCopy[i] === "any") {
-        delete inputCopy[i] //delete empty search fields
-      };
-    };
-    const keys = Object.keys(inputCopy); //use keys[0] to search api 
-    let temp = mockRes.filter(el => {
-        for (let i in keys) {
-          if (el[keys[i]] !==  inputCopy[keys[i]]) {
-            return false;
-          };
-        };
-        return true;
-      }
-    );
-    return temp;
-  }
 
   function searchSubmit(e) {
     e.preventDefault();
-    // Axios.get("")
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
-    // delete input[keys[0]];
-    dispatch(searchClass(filterResults()))
-    push("/searchResults");
+    dispatch(searchClass(input))
+    push("/search-results");
   };
 
   return (
