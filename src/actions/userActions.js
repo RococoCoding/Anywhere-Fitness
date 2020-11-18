@@ -18,6 +18,7 @@ export const skipOnboarding = () => {
 }
 
 export const deleteClass = (value) => {
+  console.log("in user actions")
   return {type: DELETE_CLASS, payload: value};
 }
 

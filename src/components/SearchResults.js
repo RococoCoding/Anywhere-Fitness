@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { updateClassList } from "../actions/userActions";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export default function SearchResults() {
   const foundClasses = useSelector(state => state.classReducer);
+  const user = useSelector(state => state.userReducer);
   
   const dispatch = useDispatch();
   const { push } = useHistory();
@@ -13,7 +15,7 @@ export default function SearchResults() {
   function reserveSpot(id) { 
     // 1) adds to attendees in server class data; 
     // 2) adds class to server user data & updates user's class list via dispatch action
-    let classToAdd = foundClasses.filter(el=>el.id === id)
+    let classToAdd = foundClasses.filter(el=>el.id === id);
     function addToAttendees(id) {
       classToAdd[0].attendees++
       // Axios.put(`${id}`, {classToAdd[0]})
@@ -28,11 +30,15 @@ export default function SearchResults() {
         duration: classToAdd[0].duration,
         id: id
       }
+      axiosWithAuth()
+        .post(`https://back-end12345.herokuapp.com/api/auth/users/classes/1/newclass`, {class_id: userClass.id})
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
       dispatch(updateClassList(userClass));
     } 
-    addToAttendees();
+    // addToAttendees();
     addToUser();
-    push("/protected");
+    push("/dashboard");
   }
   return (
     <div>

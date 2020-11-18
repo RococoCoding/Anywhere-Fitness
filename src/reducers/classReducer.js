@@ -1,4 +1,4 @@
-import { ADD_CLASS, SEARCH_CLASS, SET_EDIT } from "../actions/classActions";
+import { ADD_CLASS, SEARCH_CLASS, SET_EDIT} from "../actions/classActions";
 
 // const initialState = {
 //   classID: 0, 
@@ -24,8 +24,6 @@ const classReducer = (state = initialState, action) => {
       function filterResults() {
         const inputCopy = {...action.payload.search_input};
         let results = action.payload.results;
-        // console.log({inputCopy})
-        // console.log({results})
         for (let i in inputCopy) {
           if (!inputCopy[i]) {
             delete inputCopy[i] //delete empty search fields
@@ -42,7 +40,6 @@ const classReducer = (state = initialState, action) => {
             return true;
           }
         );
-        console.log(temp)
         return temp ? temp : results;
       }
       let results = filterResults()

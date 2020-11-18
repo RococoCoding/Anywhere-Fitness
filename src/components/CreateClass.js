@@ -3,35 +3,36 @@ import { useState } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
+const initialValues = {
+  name: '',
+  instructor_name: '',
+  type: '',
+  start_time: '',
+  duration: '',
+  intensity: '',
+  location: '',
+  date: '',
+  number_attendees: '0',
+  max_size: '',
+}
+
+const initialFormErrors = {
+  name: '',
+  instructor_name: '',
+  type: '',
+  date: '',
+  start_time: '',
+  duration: '',
+  intensity: '',
+  location: '',
+  max_size: '',
+  number_attendees: '',
+}
 
 export default function CreateClass() {
-  const initialValues = {
-    name: '',
-    instructor_name: '',
-    type: '',
-    start_time: '',
-    duration: '',
-    intensity: '',
-    location: '',
-    date: '',
-    number_attendees: '0',
-    max_size: '',
-  }
-
-  const initialFormErrors = {
-    name: '',
-    instructor_name: '',
-    type: '',
-    date: '',
-    start_time: '',
-    duration: '',
-    intensity: '',
-    location: '',
-    max_size: '',
-    number_attendees: '',
-  }
-
+  const { push } = useHistory();
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialFormErrors);
 
@@ -62,15 +63,13 @@ export default function CreateClass() {
     axiosWithAuth()
       .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', values)
       .then((res) => {
-        console.log(res);
         setValues(initialValues);
+        push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
       })
   }
-
-
 
   return (
     <form onSubmit={submitForm}>

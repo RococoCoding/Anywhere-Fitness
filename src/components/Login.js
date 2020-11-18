@@ -43,12 +43,12 @@ const Login  = () => {
 
     const submit = (evt) => {
         evt.preventDefault();
-        Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
+        Axios.post(`https://back-end12345.herokuapp.com/api/auth/login`, values)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 localStorage.setItem("token", res.data.token);
                 dispatch(saveUser(res.data.user))
-                push("/protected");
+                push("/dashboard");
             })
             .catch(err => console.log(err))
     }

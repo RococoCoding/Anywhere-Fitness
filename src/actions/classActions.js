@@ -25,3 +25,7 @@ export const searchClass = (value) => (dispatch) => {
 export const setEdit = (value) => {
   return {type: SET_EDIT, payload: value}
 }
+
+export const deleteClass = (value) => {
+  return {type: DELETE_CLASS, payload: value};
+}
