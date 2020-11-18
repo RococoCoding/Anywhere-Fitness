@@ -14,7 +14,6 @@ function App() {
         <nav>
         </nav>
       </header>
-      <Login/>
       <Link to="/protected">Dashboard</Link>
       <Route path="/protected">
         <Dashboard />
@@ -25,8 +24,16 @@ function App() {
       <Route path="/edit-class">
         <EditClass />
       </Route>
+      <Link to="/singUp">Sing Up</Link>
+        <Route path="/singUp">
+          <SignUp /> 
+        </Route>
+      <Link to="/login">Login</Link>
+        <Route path="/login">
+          <Login /> 
+        </Route>
       <CreateClass/>
-      <SignUp/>
+      
     </div>
   );
 }

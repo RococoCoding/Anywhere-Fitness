@@ -3,6 +3,7 @@
 // 2) push to you're registered page with sign in
 
 import React, {useState} from "react";
+import { Link, Route } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import schema from "./validation/signUpSchema";
