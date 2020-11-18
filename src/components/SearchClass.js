@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { searchClass } from "../actions/classActions"
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialState = {
   type: "",
@@ -18,7 +19,6 @@ const initialResults = [];
 
 export default function SearchClass() {
   const [input, setInput] = useState(initialState);
-  const [results, setResults] = useState(initialResults);
 
   const dispatch = useDispatch()
 
@@ -28,40 +28,10 @@ export default function SearchClass() {
     setInput({...input, [e.target.name]: e.target.value})
   }; 
 
-  function filterResults(keys) {
-    let inputCopy = {...input};
-    console.log({input})
-    console.log({results})
-    for (let i in inputCopy) {
-      if (!inputCopy[i]) {
-        delete inputCopy[i] //delete empty search fields
-      };
-    };
-    
-    let temp = results.filter(el => {
-        for (let i in keys) {
-          if (el[keys[i]] !==  inputCopy[keys[i]]) {
-            return false;
-          };
-        };
-        return true;
-      }
-    );
-    return temp;
-  }
-
   function searchSubmit(e) {
     e.preventDefault();
-    const keys = Object.keys(input); //use keys[0] to search api 
-    console.log(`/api/auth/users/classes/${keys[0]}/${input[keys[0]]}`)
-    Axios.get(`/api/auth/users/classes/${keys[0]}/${input[keys[0]]}`)
-      .then(res => {
-        setResults(res.data)
-      })
-      .catch(err => console.log(err));
-    delete input[keys[0]];
-    dispatch(searchClass(filterResults(keys)))
-    push("/searchResults");
+    dispatch(searchClass(input))
+    push("/search-results");
   };
 
   return (

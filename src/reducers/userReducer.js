@@ -1,4 +1,4 @@
-import { UPDATE_CLASS_LIST, SKIP_ONBOARDING, ADD_USER, DELETE_CLASS, EDIT_CLASS, SAVE_ROLE } from "../actions/userActions";
+import { UPDATE_CLASS_LIST, SKIP_ONBOARDING, ADD_USER, DELETE_CLASS, EDIT_CLASS, SAVE_USER } from "../actions/userActions";
 import Axios from "axios";
 
 const initialState = {
@@ -21,8 +21,8 @@ const userReducer = (state = initialState, action) => {
       return {...state, classes: updatedClasses};
     case SKIP_ONBOARDING: 
       return {...state, classes: []};
-    case SAVE_ROLE:
-      return {...state, role: action.payload};
+    case SAVE_USER:
+      return action.payload;
     case DELETE_CLASS:
       console.log(state.classes)
       updatedClasses = state.classes.filter(el => {

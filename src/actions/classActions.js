@@ -1,3 +1,5 @@
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+
 export const ADD_CLASS = "ADD_CLASS";
 export const DELETE_CLASS = "DELETE_CLASS";
 export const SEARCH_CLASS = "SEARCH_CLASS";
@@ -7,8 +9,17 @@ export const addClass = (value) => {
   return {type: ADD_CLASS, payload: value};
 };
 
-export const searchClass = (value) => {
-  return {type: SEARCH_CLASS, payload: value};
+export const searchClass = (value) => (dispatch) => {
+  return axiosWithAuth().get(`https://bw-back-end.herokuapp.com/api/auth/users/classes`)
+    .then(res => {
+      let payload = 
+      {
+        results: res.data.data,
+        search_input: value
+      }
+      dispatch({type: SEARCH_CLASS, payload: payload});
+    })
+  .catch(err => console.log(err));
 };
 
 export const setEdit = (value) => {

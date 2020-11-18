@@ -5,9 +5,7 @@ import Styled from "styled-components";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
-import { saveRole } from "../actions/userActions";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { saveUser } from "../actions/userActions";
 
 const initialValues = {
     username: "",
@@ -45,12 +43,11 @@ const Login  = () => {
 
     const submit = (evt) => {
         evt.preventDefault();
-        // Axios.post("http://anytime-fitness.herokuapp.com/api/auth/login", values)
         Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
             .then(res => {
-                console.log(res.data)
-                // localStorage.setItem("token", res.data.token);
-                dispatch(saveRole(res.data.role))
+                console.log(res)
+                localStorage.setItem("token", res.data.token);
+                dispatch(saveUser(res.data.user))
                 push("/protected");
             })
             .catch(err => console.log(err))
