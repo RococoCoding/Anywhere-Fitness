@@ -6,7 +6,9 @@ import axios from "axios";
 import * as yup from "yup";
 import schema from "./validation/signUpSchema";
 import Styled from "styled-components";
-
+import { addUser } from "../actions/userActions";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 
 const initialValues = {
@@ -31,7 +33,8 @@ const initialErrors = {
 const SignUp = () => {
     const[values, setValues] = useState(initialValues);
     const[errors, setErrors] = useState(initialErrors);
-    // const[users, setUsers] = useState([])
+    const dispatch = useDispatch();
+    const {push} = useHistory();
     
     const Change = (evt) => {
         const correctValue = evt.target.type === "checkbox" ? evt.target.checked :
@@ -55,11 +58,12 @@ const SignUp = () => {
 
     const postNewUser = (newUser) => {
         axios
-        .post("url", newUser)
+        .post("https://bw-back-end.herokuapp.com/api/auth/register", newUser)
         .then((res) => {
             console.log(res)
-            // setUsers([res.data, ...users]);
-            setValues(initialValues)
+            dispatch(addUser(newUser));
+            setValues(initialValues);
+            push("/");
         })
         .catch((err) => {
             console.log(err)
