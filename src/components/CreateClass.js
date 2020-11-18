@@ -61,19 +61,18 @@ export default function CreateClass() {
         e.preventDefault();
         // let raw = JSON.stringify(values)
         // console.log(values)
-        let temp = {
-          date: "2020-11-18",
-          duration: "30 minutes",
-          instructor_name: "Alice",
-          intensity: "low",
-          location: "Brooklyn",
-          max_size: "10",
-          name: "spin master deluxe",
-          type: "Spin",
-          number_attendees: "1",
-          start_time: "12:00"
-        }
-        console.log(temp)
+        // let temp = {
+        //   date: "2020-11-18",
+        //   duration: "30 minutes",
+        //   instructor_name: "Alice",
+        //   intensity: "low",
+        //   location: "Brooklyn",
+        //   max_size: "10",
+        //   name: "spin master deluxe",
+        //   type: "Spin",
+        //   number_attendees: "1",
+        //   start_time: "12:00"
+        // }
         axiosWithAuth()
           .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', temp)
           .then((res) =>{
