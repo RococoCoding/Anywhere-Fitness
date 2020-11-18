@@ -4,15 +4,14 @@ import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
 import { editClassAction } from "../actions/userActions"; 
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export default function EditClass() { 
   const classToEdit = useSelector(state => state.classReducer);
   const dispatch = useDispatch();
   const { push } = useHistory();
 
-  const initialInput = {...classToEdit}
-
-  const [input, setInput] = useState(initialInput);
+  const [input, setInput] = useState(classToEdit);
 
   function changeHandler(e) {
     setInput({...input, [e.target.name]: e.target.value})
@@ -20,8 +19,12 @@ export default function EditClass() {
 
   function editClass(e) {
     e.preventDefault();
+    axiosWithAuth()
+      .put(`https://bw-back-end.herokuapp.com/api/auth/instructor/classes/${classToEdit.id}`, input)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
     dispatch(editClassAction(input));
-    push("/protected");
+    push("/dashboard");
   }
 
   return (
@@ -32,6 +35,15 @@ export default function EditClass() {
           id="name"
           name="name"
           value={input.name}
+          onChange={changeHandler}
+        />
+      </label>
+
+      <label htmlFor="instructor_name"> Instructor Name
+        <input
+          type='text'
+          name='instructor_name'
+          value={input.instructor_name}
           onChange={changeHandler}
         />
       </label>
@@ -62,12 +74,12 @@ export default function EditClass() {
         />
       </label>
 
-      <label htmlFor="startTime">Start Time:
+      <label htmlFor="start_time">Start Time:
         <input
           type="time"
-          id="startTime"
-          name="startTime"
-          value={input.startTime}
+          id="start_time"
+          name="start_time"
+          value={input.start_time}
           onChange={changeHandler}
         />
       </label>
@@ -102,12 +114,12 @@ export default function EditClass() {
         </select>
       </label>
 
-      <label htmlFor="max">Max Attendees:
+      <label htmlFor="max_size">Max Attendees:
         <input
           type="number"
-          id="max"
-          name="max"
-          value={input.max}
+          id="max_size"
+          name="max_size"
+          value={input.max_size}
           onChange={changeHandler}
         />
       </label>

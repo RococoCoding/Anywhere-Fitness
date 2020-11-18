@@ -13,7 +13,7 @@ export default function Onboarding() {
 
   function pushToDashboard() {
     dispatch(skipOnboarding());
-    push("/protected");
+    push("/dashboard");
   }
 
   return (

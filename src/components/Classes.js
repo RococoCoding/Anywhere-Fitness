@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 import { deleteClass } from "../actions/userActions";
 import { setEdit } from "../actions/classActions";
@@ -13,7 +14,7 @@ export default function Classes(props) {
 
   function clickOnEdit(e, id) {
     // if user is client 1) delete current class from server and user state
-    if (user.role !== "instructor") {
+    if (user.role == "client") {
       let updatedClasses = [...user.classes].filter(el => el.id !== id)
       // Axios.put(`${user.id}`, {...user, classes: updatedClasses})
       // Axios.put(``)
@@ -25,15 +26,21 @@ export default function Classes(props) {
   }
   
   function deletingClass(e, id) {
-    // Axios.delete()
-    dispatch(deleteClass(id));
+    if (user.role === "instructor") {
+       axiosWithAuth()
+      .delete(`https://bw-back-end.herokuapp.com/api/auth/instructor/classes/${id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+      dispatch(deleteClass(id));
+    }
+    // if client, edit user.classes in api
   }
 
   return (
     <div>
       {classToEdit.name}
-      <button onClick={(e) => clickOnEdit(e, classToEdit.ClassID)}>Edit Class</button> 
-      <button onClick={(e) => deletingClass(e, classToEdit.classID)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</button>
+      <button onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</button> 
+      <button onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</button>
     </div>
   );
 };

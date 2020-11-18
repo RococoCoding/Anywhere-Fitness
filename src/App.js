@@ -1,15 +1,14 @@
+import { Link, Route, Switch, Redirect, useHistory } from "react-router-dom";
+
 import './App.css';
-import Login from "./components/Login";
-import SignUp from "./components/Signup"
+import Login from "./components/Login"
 import Dashboard from "./components/Dashboard";
-import { Link, Route } from "react-router-dom";
 import SearchResults from "./components/SearchResults";
 import EditClass from './components/EditClass';
 import CreateClass from './components/CreateClass';
+import SearchClass from "./components/SearchClass";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  
-  // localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInVzZXJuYW1lIjoic2lubmVyIiwicm9sZSI6Imluc3RydWN0b3IiLCJpYXQiOjE2MDU2NDI4MTEsImV4cCI6MTYwNTcyOTIxMX0.He3yuqNO0jEzqOM8oeqWGx3-j_TXmJao9aWeEKS8ilI")
   return  (
     <Route 
       {...rest}
@@ -37,19 +36,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         <nav>
-          <Link to="/singUp">Sing Up</Link>
-          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign up</Link>
+          <Link to="/dashboard">Dashboard</Link>
           <button onClick={logout}>Logout</button>
         </nav>
       </header>
       <Switch>
-        <PrivateRoute path="/protected" component={Dashboard} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/search-class" component={SearchClass} />
         <PrivateRoute path="/search-results" component={SearchResults} />
         <PrivateRoute path="/edit-class" component={EditClass} />
-        <PrivateRoute path="/create-class" component={CreateClass} />   
-        <Route path="/singUp">
-          <SignUp /> 
-        </Route>
+        <PrivateRoute path="/create-class" component={CreateClass} />
         <Route exact path="/">
           <Login />
         </Route>

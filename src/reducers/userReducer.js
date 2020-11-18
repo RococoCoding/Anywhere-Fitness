@@ -1,5 +1,4 @@
-
-import { UPDATE_CLASS_LIST, SKIP_ONBOARDING, ADD_USER, DELETE_CLASS, EDIT_CLASS, SAVE_USER } from "../actions/userActions";
+import { UPDATE_CLASS_LIST, SKIP_ONBOARDING, ADD_USER, DELETE_CLASS, SAVE_USER, EDIT_CLASS} from "../actions/userActions";
 import Axios from "axios";
 
 const initialState = {
@@ -7,6 +6,8 @@ id: 0,
 username: "",
 password: "",
 email: "",
+classes: [],
+role: ""
 };
 
 const userReducer = (state = initialState, action) => {
@@ -23,20 +24,18 @@ const userReducer = (state = initialState, action) => {
     case SAVE_USER:
       return action.payload;
     case DELETE_CLASS:
-      console.log(state.classes)
       updatedClasses = state.classes.filter(el => {
-        if (el.classID !== action.payload) {
+        console.log(action.payload, el.id)
+        if (el.id !== action.payload) {
           return true;
         } else return false;
       });
       return {...state, classes: updatedClasses};
     case EDIT_CLASS:
-      // need to find the index of the object.id that matches payload.id
-      // splice that out and replace with payload
-      updatedClasses = [...state.classes]
-      let index = updatedClasses.indexOf(el => el.id === action.payload.id);
+      updatedClasses = [...state.classes];
+      let index = updatedClasses.findIndex(el => el.id === action.payload.id);
       updatedClasses.splice(index, 1, action.payload);
-      return {...state, classes: updatedClasses}
+      return {...state, classes: updatedClasses};
     default: return state;
   }
 }
