@@ -46,7 +46,7 @@ const Login  = () => {
 
     const submit = (evt) => {
         evt.preventDefault();
-        Axios.post(`https://back-end12345.herokuapp.com/api/auth/login`, values)
+        Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
             .then(res => {
                 // console.log(res)
                 localStorage.setItem("token", res.data.token);

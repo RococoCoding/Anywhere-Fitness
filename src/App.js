@@ -7,6 +7,7 @@ import SearchResults from "./components/SearchResults";
 import EditClass from './components/EditClass';
 import CreateClass from './components/CreateClass';
 import SearchClass from "./components/SearchClass";
+import Signup from "./components/Signup";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return  (
@@ -47,6 +48,9 @@ function App() {
         <PrivateRoute path="/search-results" component={SearchResults} />
         <PrivateRoute path="/edit-class" component={EditClass} />
         <PrivateRoute path="/create-class" component={CreateClass} />
+        <Route path="/signup">
+          <Signup />
+        </Route>
         <Route exact path="/">
           <Login />
         </Route>
