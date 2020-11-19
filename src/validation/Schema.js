@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 
+const date = new Date();
 
 export default yup.object().shape({
     name: yup
@@ -12,8 +13,11 @@ export default yup.object().shape({
     .string()
     .min(1,'Please select the type of class this will be.'),
     date: yup
-    .string()
-    .required('Please Select a date for the class.'),
+    .date()
+    .required('Please Select a date for the class.')
+    .nullable()
+     .min(date,'Please select a valid date.')
+    ,
     start_time: yup
     .string()
     .required('Please pick a start time for the class.'),
@@ -29,5 +33,6 @@ export default yup.object().shape({
     number_attendees: yup
     .number(),
     max_size: yup
-    .string(),
+    .number()
+    .positive('Class size must be greater than 0'),
 })

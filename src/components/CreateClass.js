@@ -25,7 +25,7 @@ const initialFormErrors = {
   name: '',
   instructor_name: '',
   type: '',
-  date: '',
+  date: null,
   start_time: '',
   duration: '',
   intensity: '',
@@ -225,6 +225,7 @@ export default function CreateClass() {
 
         />
       </label>
+      <div>{errors.max_size ? `${errors.max_size}` : ""}</div>
       <StyleButton>Submit!</StyleButton>
     </FormContainer>
    
