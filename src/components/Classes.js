@@ -47,3 +47,4 @@ export default function Classes(props) {
     </div>
   );
 };
+
