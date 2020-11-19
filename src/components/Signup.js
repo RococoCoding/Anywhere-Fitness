@@ -1,7 +1,6 @@
 
 
 import React, {useState} from "react";
-import { Link, Route } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import schema from "./validation/signUpSchema";
@@ -85,12 +84,15 @@ const SignUp = () => {
     }
 
     return(
-        <form className="signUp-conatiner" onSubmit={submit}>
+        <ContainerDiv className="signUp-conatiner">
+        <div className="top"></div>
+        <form onSubmit={submit}>
+        <h1>Create Account</h1>
             <label>
                 <input 
                 type="text" 
                 name="name" 
-                placeholder="name"
+                placeholder="Name"
                 value={values.name}
                 onChange={Change}
                 ></input>
@@ -112,7 +114,7 @@ const SignUp = () => {
                 <input 
                 type="password" 
                 name="password" 
-                placeholder="password"
+                placeholder="Password"
                 value={values.password}
                 onChange={Change}
                 ></input>
@@ -123,17 +125,17 @@ const SignUp = () => {
                 <input 
                 type="email" 
                 name="email" 
-                placeholder="email"
+                placeholder="Email"
                 value={values.email}
                 onChange={Change}
                 ></input>
             </label>
             {errors.email ? <div>{errors.email}</div> : ""}
             <br/>
-            <label>
+            <label className="Role">
                 <select name="role" type="role" value={values.role} onChange={Change}>
                 <option >---Select Role---</option>
-                    <option type="role" value="instructor">Instructor</option>
+                    <option type="role" value="instructor">  Instructor</option>
                     <option type="role" value="client">Client</option>  
                 </select>
             </label>
@@ -141,9 +143,90 @@ const SignUp = () => {
             <br/>
             <button className="signUpBtn">Sign Up</button>
         </form>
-
+        <div className="footer"></div>
+        </ContainerDiv>
     );
 };
 
 export default SignUp;
 
+
+const ContainerDiv = Styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+background-color: #3F51B5;
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    box-shadow:0 0 20px 10px rgba(0,0,0,0.10);
+    padding: 12%;
+    background-color: #fff;
+    color: red;
+};
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15%;
+    margin-top: -30%
+}
+label{
+    display: flex;
+    justify-content: center;
+}
+input {
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+    margin:10px 0px;  //add top and bottom margin
+    width: 100%;
+    font-size: 1.5rem;
+}
+button {
+    appearance:none;
+    -webkit-appearance:none;
+    padding:15px;
+    border: solid #3F51B5;
+    background-color:#3F51B5;
+    color:#fff;
+    font-weight:600;
+    border-radius:7px;
+    width:40%;
+    margin-top: 5%;
+    margin-bottom: -5%;
+    transition: 0.5s;
+    font-size: 1.2rem;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #fff;
+    color: #3F51B5;
+    
+}
+select {
+    display: flex;
+    justify-content: center;
+    /* border: solid black; */
+    padding: 10px;
+    width: 100%;
+    border: 0;
+    box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+    margin:10px 0px;  //add top and bottom margin
+    font-size: 1.2rem;
+    cursor: pointer;
+    /* -webkit-appearance: none;  */
+    /* -moz-appearance: none;  */
+    /* -ms-appearance: none;  */
+    /* appearance: none;  */
+}
+div {
+    padding:1%;
+    width: 52%;
+}
+
+`
