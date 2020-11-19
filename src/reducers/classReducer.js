@@ -1,4 +1,4 @@
-import { ADD_CLASS, SEARCH_CLASS, SET_EDIT} from "../actions/classActions";
+import { ADD_CLASS, SEARCH_CLASS, SET_EDIT, DELETE_CLASS, EDIT_CLASS} from "../actions/classActions";
 
 // const initialState = {
 //   classID: 0, 
@@ -14,12 +14,16 @@ import { ADD_CLASS, SEARCH_CLASS, SET_EDIT} from "../actions/classActions";
 //   punchpass: "",
 //   };
 
-const initialState = [];
+const initialState = {
+  search_classes: [],
+  class_list: [],
+  edit_class: {},
+};
 
 const classReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CLASS:
-      return state
+      return {...state, "class_list": [...state.class_list, action.payload]}
     case SEARCH_CLASS:
       function filterResults() {
         const inputCopy = {...action.payload.search_input};
@@ -43,9 +47,20 @@ const classReducer = (state = initialState, action) => {
         return temp ? temp : results;
       }
       let results = filterResults()
-      return results;
+      return {...state, search_classes: results};
     case SET_EDIT:
-      return action.payload;
+      return {...state, edit_class: action.payload};
+    case DELETE_CLASS:
+      let newClassList = [...state.class_list];
+      let index = newClassList.findIndex(el => el.id === action.payload);
+      newClassList.splice(index, 1);
+      return {...state, class_list: newClassList}
+    case EDIT_CLASS:
+      let updatedClasses = [...state.class_list];
+      let index2 = updatedClasses.findIndex(el => el.id === action.payload.id);
+      console.log(action.payload)
+      updatedClasses.splice(index2, 1, action.payload);
+      return {...state, class_list: updatedClasses};
     default: return state;
   }
 }

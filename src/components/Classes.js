@@ -3,26 +3,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-import { deleteClass } from "../actions/userActions";
+import { deleteClass } from "../actions/classActions";
 import { setEdit } from "../actions/classActions";
 
 export default function Classes(props) {
   const { classToEdit } = props;
-  const user = useSelector(rootStates => rootStates.userReducer);
+  const user = useSelector(state => state.userReducer);
+  const classes = useSelector(state => state.classReducer.class_list)
   const dispatch = useDispatch();
   const { push } = useHistory();
 
   function clickOnEdit(e, id) {
     // if user is client 1) delete current class from server and user state
     if (user.role == "client") {
-      let updatedClasses = [...user.classes].filter(el => el.id !== id)
+      let updatedClasses = classes.filter(el => el.id !== id)
       // Axios.put(`${user.id}`, {...user, classes: updatedClasses})
       // Axios.put(``)
       dispatch(deleteClass(id));
       push("/search-class");
     }
-    dispatch(setEdit(classToEdit));
-    push("/edit-class");
+    else {
+      dispatch(setEdit(classToEdit));
+      push("/edit-class");
+    }
   }
   
   function deletingClass(e, id) {
@@ -33,7 +36,7 @@ export default function Classes(props) {
       .catch(err => console.log(err))
       dispatch(deleteClass(id));
     }
-    // if client, edit user.classes in api
+    dispatch(deleteClass(id));
   }
 
   return (

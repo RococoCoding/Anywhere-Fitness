@@ -57,10 +57,10 @@ const SignUp = () => {
     };
 
     const postNewUser = (newUser) => {
+        console.log(newUser)
         axios
         .post("https://bw-back-end.herokuapp.com/api/auth/register", newUser)
         .then((res) => {
-            console.log(res)
             dispatch(addUser(newUser));
             setValues(initialValues);
             push("/");

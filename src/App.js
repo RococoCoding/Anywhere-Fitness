@@ -37,6 +37,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <nav>
+          <Link to="/">Log in</Link>
           <Link to="/signup">Sign up</Link>
           <Link to="/dashboard">Dashboard</Link>
           <button onClick={logout}>Logout</button>

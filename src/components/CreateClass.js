@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
+import { addClass } from "../actions/classActions";
 
 const initialValues = {
   name: '',
@@ -32,9 +35,15 @@ const initialFormErrors = {
 
 export default function CreateClass() {
   const { push } = useHistory();
+  const dispatch = useDispatch();
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialFormErrors);
+  const user = useSelector(state => state.userReducer);
 
+  if (!user.role) {
+    push("/");
+  }
+  
   function changeValues(e) {
     e.persist();
     const correctValue = e.target.value;
@@ -58,9 +67,11 @@ export default function CreateClass() {
 
   function submitForm(e) {
     e.preventDefault();
+    dispatch(addClass(values))
     axiosWithAuth()
       .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', values)
       .then((res) => {
+        // console.log(res)
         setValues(initialValues);
         push("/dashboard");
       })

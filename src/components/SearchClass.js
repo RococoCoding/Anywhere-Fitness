@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import Axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { searchClass } from "../actions/classActions"
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialState = {
   type: "",
@@ -19,11 +17,14 @@ const initialResults = [];
 
 export default function SearchClass() {
   const [input, setInput] = useState(initialState);
-
   const dispatch = useDispatch()
-
   const { push } = useHistory();
+  const user = useSelector(state => state.userReducer);
 
+  if (!user.role) {
+    push("/");
+  }
+  
   function changeHandler(e) {
     setInput({...input, [e.target.name]: e.target.value})
   }; 
