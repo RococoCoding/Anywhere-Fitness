@@ -24,7 +24,7 @@ const initialFormErrors = {
   name: '',
   instructor_name: '',
   type: '',
-  date: '',
+  date: null,
   start_time: '',
   duration: '',
   intensity: '',
@@ -81,7 +81,8 @@ export default function CreateClass() {
   }
 
   return (
-    <form onSubmit={submitForm}>
+    <div>
+    <FormContainer onSubmit={submitForm}>
       <label htmlFor="name"> Name
         <input
           type='text'
@@ -173,7 +174,10 @@ export default function CreateClass() {
 
         />
       </label>
-      <button>Submit!</button>
-    </form>
+      <div>{errors.max_size ? `${errors.max_size}` : ""}</div>
+      <StyleButton>Submit!</StyleButton>
+    </FormContainer>
+   
+    </div>
   )
 }
