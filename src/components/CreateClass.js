@@ -67,22 +67,42 @@ export default function CreateClass() {
         .validate(values,{abortEarly:false})
         .then((res) => {
           console.log(res);
+          setValues(initialValues);
+          setErrors(initialFormErrors);
           axiosWithAuth()
                 .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', values)
                 .then((res) => {
                   console.log(res);
                   setValues(initialValues);
+                  setErrors(initialFormErrors);
                 })
                 .catch((err) => {
                   console.log(err);
                 })
 
-          setErrors({ ...errors, [values.name]: '' })
+      
         })
         .catch((err) => {
-          console.log(errors);
-          setErrors({ ...errors, [errors.name]: err.message })
-          console.log(errors);
+          console.log(err);
+          const emptyErr ={
+            name: '',
+            instructor_name: '',
+            type: '',
+            start_time: '',
+            duration: '',
+            intensity: '',
+            location: '',
+            date: '',
+            number_attendees: '0',
+            max_size: '',
+          };
+          err.inner.forEach(element => {
+            emptyErr[element.path] = element.message;
+            
+        
+          });
+          setErrors(emptyErr)
+          
         })
 
     }
@@ -94,10 +114,10 @@ export default function CreateClass() {
 
 
   return (<div>
-    <HeaderDiv>Create Class</HeaderDiv> 
-
-    <ContainerDiv onSubmit={submitForm}>
     
+<HeaderDiv>Create Class</HeaderDiv> 
+    
+    <FormContainer onSubmit={submitForm}>
       <label htmlFor="name"> Name:
         <StyledInput
           type='text'
@@ -107,6 +127,7 @@ export default function CreateClass() {
 
         />
       </label>
+      <div>{errors.name ? `${errors.name}` : ""}</div>
       <label htmlFor="instructor_name"> Instructor Name:
         <StyledInput
           type='text'
@@ -116,6 +137,7 @@ export default function CreateClass() {
 
         />
       </label>
+      <div>{errors.instructor_name ? `${errors.instructor_name}` : ""}</div>
       <label htmlFor="type"> Type:
       <StyledSelect name="type" value={values.type} onChange={changeValues} >
           <option value="">- Select an option -</option>
@@ -125,8 +147,8 @@ export default function CreateClass() {
           <option value="Zumba">Zumba</option>
         </StyledSelect>
       </label>
-      {errors.type ? `${errors[0]}` : ""}
-
+      <div>{errors.type ? `${errors.type}` : ""}</div>
+  
       <label htmlFor="date"> Date of Class:
         <StyledInput
           type="date"
@@ -135,7 +157,7 @@ export default function CreateClass() {
           onChange={changeValues}
         />
       </label>
-
+      <div>{errors.date ? `${errors.date}` : ""}</div>
       <label htmlFor="start_time">Start Time:
         <StyledInput
           type='time'
@@ -145,6 +167,7 @@ export default function CreateClass() {
 
         />
       </label>
+      <div> {errors.start_time ? `${errors.start_time}` : ""}</div>
       <label htmlFor="duration">Duration:
       <StyledSelect name="duration" value={values.duration} onChange={changeValues}>
           <option value="">- Select an option -</option>
@@ -154,6 +177,7 @@ export default function CreateClass() {
           <option value="2 hours">2 hours</option>
         </StyledSelect>
       </label>
+      <div>{errors.duration ? `${errors.duration}` : ""}</div>
       <label htmlFor="intensity">Intensity level:
       <StyledSelect name="intensity" value={values.intensity} onChange={changeValues}>
           <option value="">- Select an option -</option>
@@ -162,6 +186,7 @@ export default function CreateClass() {
           <option value="high">High</option>
         </StyledSelect>
       </label>
+      <div>{errors.intensity ? `${errors.intensity}` : ""}</div>
       <label htmlFor="location">Location:
         <StyledInput
           type='text'
@@ -171,6 +196,7 @@ export default function CreateClass() {
 
         />
       </label>
+      <div>{errors.location ? `${errors.location}` : ""}</div>
       {/* <label htmlFor="number_attendees">Current number of registered attendees
         <input 
         type='number'
@@ -190,38 +216,58 @@ export default function CreateClass() {
         />
       </label>
       <StyleButton>Submit!</StyleButton>
-    
-    </ContainerDiv>
+    </FormContainer>
+   
     </div>
   )
 }
 
-const ContainerDiv = Styled.div`
+
+
+const FormContainer = Styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
-background-color:lightgrey;
+/* background-color:lightgrey; */
 padding: 3%;
 padding-top: .5rem;
 font-size:1.3rem;
 text-align:center;
 
+label {
+  width:30vw;
+}
+div{  
+  font-size: 1.5rem;
+  color:white;
+  background-color: red;
+  
+}
+  
+}
 `
 const StyledInput = Styled.input`
 padding:10px;
-border:0;
+border:.5px solid black;
 box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
 margin:10px 0px;  //add top and bottom margin
 width: 100%;
-font-size: 1.5rem;
+font-size: 1.3rem;
+border-radius: 5px;
 `
 const StyledSelect = Styled.select`
 padding:10px;
-border:0;
 box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
 margin:10px 0px;  //add top and bottom margin
-width: 100%;
+width: 104%;
 font-size: 1rem;
+border:.5px solid black;
+border-radius: 5px;
+
+
+
+
+
 `
 const StyleButton = Styled.button`
 /* remove default behavior */
@@ -240,10 +286,24 @@ width:20rem;
 `
 
 const HeaderDiv = Styled.div`
+width:100%;
 display: flex;
 flex-direction: column;
 align-items: center;
 border-bottom: solid black;
 font-size: 3rem;
+margin-bottom: 1rem;
+background-color:#3F51B5;
+color:#fff;
+
 
 `
+// const StyledForm = Styled.form`
+// display: flex;
+// flex-direction: column;
+// align-items: center;
+// width: 30%;
+// /* height: 40%; */
+// box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+// padding: 15%;
+// color: red;
