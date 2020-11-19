@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import Classes from "./Classes";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export default function ClassList() {
   const classList = useSelector(state => state.classReducer.class_list);  
@@ -11,8 +12,8 @@ export default function ClassList() {
   const [classes, setClasses] = useState([]);
   
   useEffect(() => {
-      setClasses(classList);
-  }, [ClassList]);
+    setClasses(classList);
+  }, [classList]);
 
  
   function createOrSearch() {

@@ -41,8 +41,8 @@ export default function Classes(props) {
 
   return (
     <div>
-      {classToEdit.name}
-      <button onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</button> 
+      <p>{classToEdit.name}</p>
+      <button onClick={(e) => clickOnEdit(e, classToEdit.id)}>{user.role === "instructor" ? "Edit Class" : "Reschedule"}</button> 
       <button onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</button>
     </div>
   );

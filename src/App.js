@@ -8,6 +8,7 @@ import EditClass from './components/EditClass';
 import CreateClass from './components/CreateClass';
 import SearchClass from "./components/SearchClass";
 import Signup from "./components/Signup";
+import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return  (
@@ -27,6 +28,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 function App() {
   const { push } = useHistory();
+  const { user } = useSelector(state => state.userReducer.role)
 
   function logout() {
     localStorage.clear();
@@ -36,12 +38,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <nav>
-          <Link to="/">Log in</Link>
-          <Link to="/signup">Sign up</Link>
-          <Link to="/dashboard">Dashboard</Link>
-          <button onClick={logout}>Logout</button>
-        </nav>
+          {user ? 
+            <nav>
+              <Link to="/dashboard">Dashboard</Link> 
+              <div onClick={logout}>Logout</div>
+            </nav>
+          : 
+            <nav>
+              <Link to="/">Log in</Link>
+              <Link to="/signup">Sign up</Link>}
+            </nav>
+          }
       </header>
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} />

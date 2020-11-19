@@ -67,7 +67,7 @@ const Login  = () => {
     return(
         
         <ContainerDiv>
-            <TopDiv>hello</TopDiv>
+            <TopDiv></TopDiv>
         <StyledForm className="logIn-container" onSubmit={submit}>
             <StyledLabel>
                 <StyledInput 
