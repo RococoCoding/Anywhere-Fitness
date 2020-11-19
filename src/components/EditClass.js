@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
 
-import { editClassAction } from "../actions/userActions"; 
+import { editClassAction } from "../actions/classActions"; 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export default function EditClass() { 
-  const classToEdit = useSelector(state => state.classReducer);
+  const classToEdit = useSelector(state => state.classReducer.edit_class);
   const dispatch = useDispatch();
   const { push } = useHistory();
-
   const [input, setInput] = useState(classToEdit);
+  const user = useSelector(state => state.userReducer);
 
+  if (!user.role) {
+    push("/");
+  }
+  
   function changeHandler(e) {
     setInput({...input, [e.target.name]: e.target.value})
   }
@@ -28,7 +31,7 @@ export default function EditClass() {
   }
 
   return (
-    <form onSubmit={(e) => editClass(e, input)}>
+    <form onSubmit={editClass}>
       <label htmlFor="name">Name:
         <input
           type="text"
