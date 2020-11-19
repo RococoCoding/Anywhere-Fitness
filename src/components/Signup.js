@@ -16,6 +16,7 @@ const initialValues = {
     password: "",
     email: "",
     role: "",
+    signedup: false,
 }
 
 const initialErrors = {

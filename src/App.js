@@ -27,28 +27,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 function App() {
-  const { push } = useHistory();
   const { user } = useSelector(state => state.userReducer.role)
 
-  function logout() {
-    localStorage.clear();
-    push("/");
-  }
 
   return (
     <div className="App">
       <header className="App-header">
-          {user ? 
-            <nav>
-              <Link to="/dashboard">Dashboard</Link> 
-              <div onClick={logout}>Logout</div>
-            </nav>
-          : 
-            <nav>
-              <Link to="/">Log in</Link>
-              <Link to="/signup">Sign up</Link>}
-            </nav>
-          }
+        <nav>
+          <Link to="/">Log in</Link>
+          <Link to="/signup">Sign up</Link>
+        </nav>
       </header>
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} />

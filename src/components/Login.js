@@ -7,7 +7,6 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../actions/userActions";
-import { clearState } from "../actions/classActions";
 
 const initialValues = {
     username: "",
@@ -58,7 +57,6 @@ const Login  = () => {
                     username: res.data.user.username
                 }
                 dispatch(saveUser(user)) //sets user
-                dispatch(clearState()) //clears class state  -- need to change if loading classes from api 
                 push("/dashboard");
             })
             .catch(err => console.log(err))
