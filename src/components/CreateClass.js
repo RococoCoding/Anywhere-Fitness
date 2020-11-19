@@ -1,38 +1,41 @@
-import React from "react";
 import { useState } from 'react';
 import * as yup from 'yup';
 import schema from '../validation/Schema'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+<<<<<<< HEAD
 import Styled from 'styled-components';
+=======
+import { useHistory } from "react-router-dom";
 
+const initialValues = {
+  name: '',
+  instructor_name: '',
+  type: '',
+  start_time: '',
+  duration: '',
+  intensity: '',
+  location: '',
+  date: '',
+  number_attendees: '0',
+  max_size: '',
+}
+>>>>>>> 115b49a2a735ec8a369a5409668338cd892d446d
+
+const initialFormErrors = {
+  name: '',
+  instructor_name: '',
+  type: '',
+  date: '',
+  start_time: '',
+  duration: '',
+  intensity: '',
+  location: '',
+  max_size: '',
+  number_attendees: '',
+}
 
 export default function CreateClass() {
-  const initialValues = {
-    name: '',
-    instructor_name: '',
-    type: '',
-    start_time: '',
-    duration: '',
-    intensity: '',
-    location: '',
-    date: '',
-    number_attendees: '0',
-    max_size: '',
-  }
-
-  const initialFormErrors = {
-    name: '',
-    instructor_name: '',
-    type: '',
-    date: '',
-    start_time: '',
-    duration: '',
-    intensity: '',
-    location: '',
-    max_size: '',
-    number_attendees: '',
-  }
-
+  const { push } = useHistory();
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialFormErrors);
 
@@ -108,6 +111,7 @@ export default function CreateClass() {
     }
       
     validate();
+<<<<<<< HEAD
     console.log(errors)
   }
 
@@ -120,6 +124,28 @@ export default function CreateClass() {
     <FormContainer onSubmit={submitForm}>
       <label htmlFor="name"> Name:
         <StyledInput
+=======
+    setValues({ ...values, [e.target.name]: correctValue })
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('https://bw-back-end.herokuapp.com/api/auth/instructor/classes', values)
+      .then((res) => {
+        setValues(initialValues);
+        push("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  return (
+    <form onSubmit={submitForm}>
+      <label htmlFor="name"> Name
+        <input
+>>>>>>> 115b49a2a735ec8a369a5409668338cd892d446d
           type='text'
           name='name'
           value={values.name}
