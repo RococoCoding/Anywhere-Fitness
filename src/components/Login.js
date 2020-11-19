@@ -7,6 +7,7 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../actions/userActions";
+import { clearState } from "../actions/classActions";
 
 const initialValues = {
     username: "",
@@ -48,9 +49,16 @@ const Login  = () => {
         evt.preventDefault();
         Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
             .then(res => {
-                // console.log(res)
                 localStorage.setItem("token", res.data.token);
-                dispatch(saveUser(res.data.user))
+                let user = {
+                    name: res.data.user.name,
+                    email: res.data.user.email,
+                    id: res.data.user.id,
+                    role: res.data.user.role,
+                    username: res.data.user.username
+                }
+                dispatch(saveUser(user)) //sets user
+                dispatch(clearState()) //clears class state  -- need to change if loading classes from api 
                 push("/dashboard");
             })
             .catch(err => console.log(err))
