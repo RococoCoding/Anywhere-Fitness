@@ -1,4 +1,4 @@
-import { ADD_CLASS, SEARCH_CLASS, SET_EDIT, DELETE_CLASS, EDIT_CLASS} from "../actions/classActions";
+import { ADD_CLASS, SEARCH_CLASS, SET_EDIT, DELETE_CLASS, EDIT_CLASS, CLEAR_STATE} from "../actions/classActions";
 
 // const initialState = {
 //   classID: 0, 
@@ -61,6 +61,8 @@ const classReducer = (state = initialState, action) => {
       console.log(action.payload)
       updatedClasses.splice(index2, 1, action.payload);
       return {...state, class_list: updatedClasses};
+    case CLEAR_STATE:
+      return initialState;
     default: return state;
   }
 }
