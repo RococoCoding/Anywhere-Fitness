@@ -163,7 +163,7 @@ form {
     flex-direction: column;
     align-items: center;
     width: 30%;
-    box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+    box-shadow:0 0 20px 10px rgba(0,0,0,0.10);
     padding: 12%;
     background-color: #fff;
     color: red;
@@ -191,7 +191,7 @@ button {
     appearance:none;
     -webkit-appearance:none;
     padding:15px;
-    border:none;
+    border: solid #3F51B5;
     background-color:#3F51B5;
     color:#fff;
     font-weight:600;
@@ -206,7 +206,7 @@ button:hover {
     cursor: pointer;
     background-color: #fff;
     color: #3F51B5;
-    border: solid #3F51B5;
+    
 }
 select {
     display: flex;
