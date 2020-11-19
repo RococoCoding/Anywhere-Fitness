@@ -52,6 +52,7 @@ font-size:1.3rem;
 text-align:center;
 height:100vh;
 font-size: 3rem;
+box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
 
 
 .link {
@@ -70,6 +71,7 @@ font-size: 3rem;
 const Middlediv = Styled.div`
   margin-top: 2%;
     background-color: white;
-    width: 70%;
-    height: 87%;
+    width: 60%;
+    height: 95%;
+    box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
   `

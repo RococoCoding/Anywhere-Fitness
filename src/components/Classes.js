@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-
+import Styled from 'styled-components';
 import { deleteClass } from "../actions/classActions";
 import { setEdit } from "../actions/classActions";
 
@@ -40,11 +40,41 @@ export default function Classes(props) {
   }
 
   return (
-    <div>
-      {classToEdit.name}
-      <button onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</button> 
-      <button onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</button>
-    </div>
+    <StyledDiv>
+      <div className= 'className'>{classToEdit.name}</div>
+      <div><StyleButton onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</StyleButton> 
+      <StyleButton onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</StyleButton>
+      </div>
+    </StyledDiv>
   );
 };
 
+const StyleButton = Styled.button`
+/* remove default behavior */
+appearance:none;
+-webkit-appearance:none;
+
+/* usual styles */
+padding:10px;
+border:none;
+background-color:#3F51B5;
+color:#fff;
+font-weight:600;
+border-radius:7px;
+width:40%;
+
+`
+const StyledDiv = Styled.div`
+display: flex;
+justify-content: space-evenly;
+
+div{
+  display:flex;
+  padding:20px;
+  width:50%;
+  justify-content: space-between;
+}
+.className{
+  font-size:2rem;
+}
+`
