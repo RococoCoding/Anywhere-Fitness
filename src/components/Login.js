@@ -57,7 +57,6 @@ const Login = () => {
                     role: res.data.user.role,
                     username: res.data.user.username,
                 }
-                console.log("push to loading classes inside of axios")
                 dispatch(saveUser(user)) //sets user
                 push("/loading-classes");
             })

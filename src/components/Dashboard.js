@@ -27,7 +27,6 @@ padding: 3%;
 padding-top: .5rem;
 font-size:1.3rem;
 text-align:center;
-height:100vh;
 font-size: 3rem;
 box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
 

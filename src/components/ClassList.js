@@ -19,7 +19,6 @@ export default function ClassList() {
   }
 
   if (!user?.role) {
-    console.log("no role  ")
     push("/");
   }
 
@@ -29,7 +28,6 @@ export default function ClassList() {
         Class List
         {user.role === "instructor" ?
           classes.map((el, idx) => {
-            console.log("instructor", classes)
             return (
               <Classes classToEdit={el} key={idx} />
             )
@@ -45,7 +43,6 @@ export default function ClassList() {
     );
   }
   else {
-    console.log("else")
     return (
       <div onClick={createOrSearch}>{user.role === "instructor" ? "Create a class!" : "Search for a class!"}</div>
     )

@@ -8,6 +8,7 @@ export const EDIT_CLASS = "EDIT_CLASS";
 export const SET_CLASS_LIST = "SET_CLASS_LIST";
 export const FILTER_STATE = "FILTER_STATE";
 export const CLEAR_CLASSES = "CLEAR_CLASSES";
+export const TOGGLE_PUNCH = "TOGGLE_PUNCH";
 
 export const addClass = (value) => {
   return { type: ADD_CLASS, payload: value };
@@ -48,4 +49,8 @@ export const filterState = (value) => {
 
 export const clearClasses = () => {
   return { type: CLEAR_CLASSES }
+}
+
+export const togglePunch = (value) => {
+  return { type: TOGGLE_PUNCH, payload: value }
 }

@@ -214,7 +214,7 @@ appearance: none;
 align: center;
 padding: 15px;
 border: none;
-background - color:#3F51B5;
+background-color:#3F51B5;
 color:#fff;
 font - weight: 600;
 border - radius: 7px;
