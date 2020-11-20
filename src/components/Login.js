@@ -67,7 +67,7 @@ const Login  = () => {
     return(
         
         <ContainerDiv>
-            <TopDiv>hello</TopDiv>
+        <div></div>    
         <StyledForm className="logIn-container" onSubmit={submit}>
             <StyledLabel>
                 <StyledInput 
@@ -91,8 +91,9 @@ const Login  = () => {
             </StyledLabel>
             {errors.password ? <div>{errors.password}</div> : ""}
             <br/>
-            <StyleButton id="logInBtn" >Login</StyleButton>
+            <button id="logInBtn" >Login</button>
         </StyledForm>
+        <div></div>
         </ContainerDiv>
     );
 };
@@ -104,14 +105,36 @@ const ContainerDiv = Styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-/* border: solid black; */
-`
-
-const TopDiv = Styled.div`
-padding: 20px;
-width: 100%;
-margin-bottom: 1%;
 background-color: #3F51B5;
+padding:1%;
+div {
+    padding: 1.5%;
+    width: 97%;
+}
+button {
+    /* remove default behavior */
+    appearance:none;
+    -webkit-appearance:none;
+
+    /* usual styles */
+    font-size: 1.2rem;
+    padding:15px;
+    border:solid #3F51B5;
+    background-color:#3F51B5;
+    color:#fff;
+    font-weight:600;
+    border-radius:7px;
+    margin-top: 5%;
+    margin-bottom: -5%;
+    width:40%;
+    transition: 0.5s;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #fff;
+    color: #3F51B5;
+}
+
 `
 
 const StyledForm = Styled.form`
@@ -120,9 +143,10 @@ flex-direction: column;
 align-items: center;
 width: 30%;
 /* height: 40%; */
-box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+box-shadow:0 0 25px 15px rgba(0,0,0,0.26);
 padding: 15%;
 color: red;
+background-color: white;
 `
 
 const StyledLabel = Styled.label`
@@ -140,18 +164,4 @@ width: 100%;
 font-size: 1.5rem;
 `
 
-const StyleButton = Styled.button`
-/* remove default behavior */
-appearance:none;
--webkit-appearance:none;
 
-/* usual styles */
-padding:15px;
-border:none;
-background-color:#3F51B5;
-color:#fff;
-font-weight:600;
-border-radius:7px;
-width:40%;
-
-`
