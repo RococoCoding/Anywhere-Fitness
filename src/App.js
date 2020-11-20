@@ -1,4 +1,4 @@
-import {Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import React from "react";
 
 import './App.css';
@@ -14,9 +14,9 @@ import Nav from "./components/nav";
 import LoadingClasses from "./components/LoadingClasses";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  
-  return  (
-    <Route 
+
+  return (
+    <Route
       {...rest}
       render={props => {
         let token = localStorage.getItem('token')
@@ -25,13 +25,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         } else {
           return <Redirect to='/' />
         }
-      }} 
+      }}
     />
   )
 };
 
 function App() {
- 
+
   return (
     <div className="App">
       <header className="App-header">

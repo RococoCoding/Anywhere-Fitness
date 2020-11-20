@@ -1,19 +1,14 @@
 
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { setClassList } from "../actions/classActions";
+import React from "react";
 import Styled from 'styled-components';
 
 import Onboarding from "./Onboarding";
 import ClassList from "./ClassList";
 
 export default function Dashboard() {
-  const user = useSelector(state => state.userReducer);
   const onboarded = localStorage.getItem('onboarding'); // using local storage to check for onboarding because we forgot to add an edit user endpoint. could do clients via saved classes, but instructors don't have classes saved for them, so no other way to track if they've been on boarded.
 
-  //   console.log("onboarded", onboarded)
-     return (
+  return (
     <DivContainer>
       <Middlediv>
         Dashboard

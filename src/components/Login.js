@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import schema from "./validation/loginSchema"
 import Styled from "styled-components";
@@ -18,30 +18,30 @@ const initialErrors = {
     password: "",
 }
 
-const Login  = () => {
+const Login = () => {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState(initialErrors);
 
     const { push } = useHistory();
     const dispatch = useDispatch();
-    
+
     const Change = (evt) => {
         const correctValue = evt.target.value.trim();
         const validation = () => {
             yup
-            .reach(schema, evt.target.name)
-            .validate(correctValue)
-            .then((res) => {
-                setErrors({...errors, [evt.target.name] : ""})
-                // console.log(res)
-            })
-            .catch((err) => {
+                .reach(schema, evt.target.name)
+                .validate(correctValue)
+                .then((res) => {
+                    setErrors({ ...errors, [evt.target.name]: "" })
+                    // console.log(res)
+                })
+                .catch((err) => {
 
-                setErrors({...errors,[evt.target.name] : err.message})
-            })
+                    setErrors({ ...errors, [evt.target.name]: err.message })
+                })
         }
         validation()
-        setValues({...values,[evt.target.name] : correctValue});
+        setValues({ ...values, [evt.target.name]: correctValue });
     }
 
     const submit = (evt) => {
@@ -64,36 +64,36 @@ const Login  = () => {
             .catch(err => console.log("error", err))
     }
 
-    return(
-        
+    return (
+
         <ContainerDiv>
-        <div className="top"></div>
-        <StyledForm className="logIn-container" onSubmit={submit}>
-            <h1>Log in</h1>
-            <StyledLabel>
-                <StyledInput 
-                type="text" 
-                name="username" 
-                placeholder="Username"
-                value={values.username}
-                onChange={Change}
-                ></StyledInput>
-            </StyledLabel>
-            {errors.username ? <div>{errors.username}</div> : ""}
-            <br/>
-            <StyledLabel>
-                <StyledInput 
-                type="password" 
-                name="password" 
-                placeholder="Password"
-                value={values.password}
-                onChange={Change}
-                ></StyledInput>
-            </StyledLabel>
-            {errors.password ? <div>{errors.password}</div> : ""}
-            <br/>
-            <StyleButton id="logInBtn" >Login</StyleButton>
-        </StyledForm>
+            <div className="top"></div>
+            <StyledForm className="logIn-container" onSubmit={submit}>
+                <h1>Log in</h1>
+                <StyledLabel>
+                    <StyledInput
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value={values.username}
+                        onChange={Change}
+                    ></StyledInput>
+                </StyledLabel>
+                {errors.username ? <div>{errors.username}</div> : ""}
+                <br />
+                <StyledLabel>
+                    <StyledInput
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={values.password}
+                        onChange={Change}
+                    ></StyledInput>
+                </StyledLabel>
+                {errors.password ? <div>{errors.password}</div> : ""}
+                <br />
+                <StyleButton id="logInBtn" >Login</StyleButton>
+            </StyledForm>
         </ContainerDiv>
     );
 };

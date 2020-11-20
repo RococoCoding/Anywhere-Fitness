@@ -15,8 +15,8 @@ export default function SearchResults() {
     push("/");
   }
 
-  function reserveSpot(id) { 
-    let classToAdd = foundClasses.filter(el=>el.id === id);
+  function reserveSpot(id) {
+    let classToAdd = foundClasses.filter(el => el.id === id);
     // api not working
     // function addToAttendees(id) {// adds one to class.number_attendees in server database
     //   let attendees = Number(classToAdd[0].number_attendees)
@@ -28,7 +28,7 @@ export default function SearchResults() {
     //     .catch(err => console.log("add to attendees", err))
     // }
     axiosWithAuth() //adds class to the client's data on the server for recall on future logins
-      .post(`https://bw-back-end.herokuapp.com/api/auth/users/classes/${user.id}/newclass`, {class_id: id})
+      .post(`https://bw-back-end.herokuapp.com/api/auth/users/classes/${user.id}/newclass`, { class_id: id })
       .then(res => console.log("add to user classes", res))
       .catch(err => console.log("add to user classes", err))
     // addToAttendees();
@@ -40,9 +40,9 @@ export default function SearchResults() {
     <div>
       {foundClasses.map((el, idx) => {
         return (
-        <div key={idx}> {el.name} {el.date} {el.startTime} {el.location}
-          <button onClick={()=>reserveSpot(el.id)}>Reserve a spot</button>
-        </div>
+          <div key={idx}> {el.name} {el.date} {el.startTime} {el.location}
+            <button onClick={() => reserveSpot(el.id)}>Reserve a spot</button>
+          </div>
         )
       })}
     </div>

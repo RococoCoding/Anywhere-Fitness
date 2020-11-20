@@ -27,13 +27,13 @@ export default function Classes(props) {
       push("/edit-class");
     }
   }
-  
+
   function deletingClass(e, id) {
     if (user.role === "instructor") {
-       axiosWithAuth()
-      .delete(`https://bw-back-end.herokuapp.com/api/auth/instructor/classes/${id}`)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      axiosWithAuth()
+        .delete(`https://bw-back-end.herokuapp.com/api/auth/instructor/classes/${id}`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
     dispatch(deleteClass(id));
   }
@@ -46,8 +46,8 @@ export default function Classes(props) {
         <p>{classToEdit.time}</p>
         <p>{classToEdit.time}</p>
       </div>
-      <div><StyleButton onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</StyleButton> 
-      <StyleButton onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</StyleButton>
+      <div><StyleButton onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</StyleButton>
+        <StyleButton onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</StyleButton>
       </div>
     </StyledDiv>
   );

@@ -10,42 +10,42 @@ export const FILTER_STATE = "FILTER_STATE";
 export const CLEAR_CLASSES = "CLEAR_CLASSES";
 
 export const addClass = (value) => {
-  return {type: ADD_CLASS, payload: value};
+  return { type: ADD_CLASS, payload: value };
 };
 
 export const searchClass = (value) => (dispatch) => {
   return axiosWithAuth().get(`https://bw-back-end.herokuapp.com/api/auth/users/classes`)
     .then(res => {
-      let payload = 
+      let payload =
       {
         results: res.data.data,
         search_input: value
       }
-      dispatch({type: SEARCH_CLASS, payload: payload});
+      dispatch({ type: SEARCH_CLASS, payload: payload });
     })
-  .catch(err => console.log(err));
+    .catch(err => console.log(err));
 };
 
 export const setEdit = (value) => {
-  return {type: SET_EDIT, payload: value}
+  return { type: SET_EDIT, payload: value }
 }
 
 export const deleteClass = (value) => {
-  return {type: DELETE_CLASS, payload: value};
+  return { type: DELETE_CLASS, payload: value };
 }
 
 export const editClassAction = (value) => {
-  return {type: EDIT_CLASS, payload: value}
+  return { type: EDIT_CLASS, payload: value }
 }
 
 export const setClassList = (value) => {
-  return {type: SET_CLASS_LIST, payload: value}
+  return { type: SET_CLASS_LIST, payload: value }
 }
 
 export const filterState = (value) => {
-  return {type: FILTER_STATE, payload: value}
+  return { type: FILTER_STATE, payload: value }
 }
 
 export const clearClasses = () => {
-  return {type: CLEAR_CLASSES}
+  return { type: CLEAR_CLASSES }
 }

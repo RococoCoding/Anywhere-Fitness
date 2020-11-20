@@ -13,7 +13,6 @@ const initialState = {
   location: "",
 };
 
-const initialResults = [];
 
 export default function SearchClass() {
   const [input, setInput] = useState(initialState);
@@ -24,10 +23,10 @@ export default function SearchClass() {
   if (!user.role) {
     push("/");
   }
-  
+
   function changeHandler(e) {
-    setInput({...input, [e.target.name]: e.target.value})
-  }; 
+    setInput({ ...input, [e.target.name]: e.target.value })
+  };
 
 
   function searchSubmit(e) {
@@ -40,7 +39,7 @@ export default function SearchClass() {
   return (
     <form onSubmit={searchSubmit}>
       <p>Find a class</p>
-      
+
       <label htmlFor="type">
         <select
           name="type"
@@ -55,19 +54,19 @@ export default function SearchClass() {
           <option value="weights">Zumba</option>
         </select>
       </label>
-      
+
       <label htmlFor="time">
-        <input 
+        <input
           type="time"
           name="time"
           value={input.time}
           onChange={changeHandler}
         />
       </label>
-      
+
       <label htmlFor="duration">
         <select
-          name="duration" 
+          name="duration"
           id="duration"
           type="dropdown"
           onChange={changeHandler}
@@ -80,16 +79,16 @@ export default function SearchClass() {
       </label>
 
       <label htmlFor="date">
-        <input 
+        <input
           type="date"
           name="date"
           value={input.date}
           onChange={changeHandler}
         />
       </label>
-      
+
       <label htmlFor="intensity">
-        <select 
+        <select
           name="intensity"
           id="intensity"
           type="dropdown"
@@ -101,9 +100,9 @@ export default function SearchClass() {
           <option value="high">High</option>
         </select>
       </label>
-      
+
       <label htmlFor="location">
-        <select 
+        <select
           name="location"
           id="location"
           type="dropdown"

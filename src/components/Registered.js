@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export default function Registered() {
 
-    return(
+    return (
         <StyledCongrats>
             <h1 className="congrats">Congratulations! You've been successfully registered. You may now log in.</h1>
             <Login />

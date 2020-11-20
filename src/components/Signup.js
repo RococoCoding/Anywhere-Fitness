@@ -1,13 +1,11 @@
 
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import schema from "./validation/signUpSchema";
 import Styled from "styled-components";
-import { addUser } from "../actions/userActions";
-import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 const initialValues = {
@@ -31,41 +29,40 @@ const initialErrors = {
 
 
 const SignUp = () => {
-    const[values, setValues] = useState(initialValues);
-    const[errors, setErrors] = useState(initialErrors);
-    const dispatch = useDispatch();
-    const {push} = useHistory();
-    
+    const [values, setValues] = useState(initialValues);
+    const [errors, setErrors] = useState(initialErrors);
+    const { push } = useHistory();
+
     const Change = (evt) => {
         const correctValue = evt.target.type === "checkbox" ? evt.target.checked :
-        evt.target.value;
+            evt.target.value;
         const validation = () => {
             yup
-            .reach(schema, evt.target.name)
-            .validate(correctValue)
-            .then((res) => {
-                setErrors({...errors, [evt.target.name] : ""})
-                // console.log(res)
-            })
-            .catch((err) => {
-                console.log(err)
-                setErrors({...errors,[evt.target.name] : err.message})
-            })
+                .reach(schema, evt.target.name)
+                .validate(correctValue)
+                .then((res) => {
+                    setErrors({ ...errors, [evt.target.name]: "" })
+                    // console.log(res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    setErrors({ ...errors, [evt.target.name]: err.message })
+                })
         }
         validation()
-        setValues({...values,[evt.target.name] : correctValue})
+        setValues({ ...values, [evt.target.name]: correctValue })
     };
 
     const postNewUser = (newUser) => {
         axios
-        .post("https://bw-back-end.herokuapp.com/api/auth/register", newUser)
-        .then((res) => {
-            setValues(initialValues);
-            push("/registered");
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .post("https://bw-back-end.herokuapp.com/api/auth/register", newUser)
+            .then((res) => {
+                setValues(initialValues);
+                push("/registered");
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const submit = (evt) => {
@@ -81,67 +78,67 @@ const SignUp = () => {
         console.log(newUser)
     }
 
-    return(
+    return (
         <ContainerDiv className="signUp-conatiner">
-        <div className="top"></div>
-        <form onSubmit={submit}>
-        <h1>Create Account</h1>
-            <label>
-                <input 
-                type="text" 
-                name="name" 
-                placeholder="Name"
-                value={values.name}
-                onChange={Change}
-                ></input>
-            </label>
-             {errors.name ? <div>{errors.name}</div> : ""}
-            <br/>
-            <label>
-                <input 
-                type="text" 
-                name="username" 
-                placeholder="Username"
-                value={values.username}
-                onChange={Change}
-                ></input>
-            </label>
-            {errors.username ? <div>{errors.username}</div> : ""}
-            <br/>
-            <label>
-                <input 
-                type="password" 
-                name="password" 
-                placeholder="Password"
-                value={values.password}
-                onChange={Change}
-                ></input>
-            </label>
-            {errors.password ? <div>{errors.password}</div> : ""}
-            <br/>
-            <label>
-                <input 
-                type="email" 
-                name="email" 
-                placeholder="Email"
-                value={values.email}
-                onChange={Change}
-                ></input>
-            </label>
-            {errors.email ? <div>{errors.email}</div> : ""}
-            <br/>
-            <label className="Role">
-                <select name="role" type="role" value={values.role} onChange={Change}>
-                <option >---Select Role---</option>
-                    <option type="role" value="instructor">  Instructor</option>
-                    <option type="role" value="client">Client</option>  
-                </select>
-            </label>
-            {errors.role ? <div>{errors.role}</div> : ""}
-            <br/>
-            <button className="signUpBtn">Sign Up</button>
-        </form>
-        <div className="footer"></div>
+            <div className="top"></div>
+            <form onSubmit={submit}>
+                <h1>Create Account</h1>
+                <label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        value={values.name}
+                        onChange={Change}
+                    ></input>
+                </label>
+                {errors.name ? <div>{errors.name}</div> : ""}
+                <br />
+                <label>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value={values.username}
+                        onChange={Change}
+                    ></input>
+                </label>
+                {errors.username ? <div>{errors.username}</div> : ""}
+                <br />
+                <label>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={values.password}
+                        onChange={Change}
+                    ></input>
+                </label>
+                {errors.password ? <div>{errors.password}</div> : ""}
+                <br />
+                <label>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={values.email}
+                        onChange={Change}
+                    ></input>
+                </label>
+                {errors.email ? <div>{errors.email}</div> : ""}
+                <br />
+                <label className="Role">
+                    <select name="role" type="role" value={values.role} onChange={Change}>
+                        <option >---Select Role---</option>
+                        <option type="role" value="instructor">  Instructor</option>
+                        <option type="role" value="client">Client</option>
+                    </select>
+                </label>
+                {errors.role ? <div>{errors.role}</div> : ""}
+                <br />
+                <button className="signUpBtn">Sign Up</button>
+            </form>
+            <div className="footer"></div>
         </ContainerDiv>
     );
 };

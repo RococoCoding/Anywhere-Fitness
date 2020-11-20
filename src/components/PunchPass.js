@@ -10,7 +10,7 @@ export default function PunchPass() {
   if (!user.role) {
     push("/");
   }
-  
+
   return (
     <div></div>
   );
