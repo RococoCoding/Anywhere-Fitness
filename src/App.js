@@ -1,4 +1,5 @@
-import { Link, Route, Switch, Redirect, useHistory } from "react-router-dom";
+import {Route, Switch, Redirect } from "react-router-dom";
+import React from "react";
 
 import './App.css';
 import Login from "./components/Login"
@@ -8,9 +9,12 @@ import EditClass from './components/EditClass';
 import CreateClass from './components/CreateClass';
 import SearchClass from "./components/SearchClass";
 import Signup from "./components/Signup";
-import { useSelector } from "react-redux";
+import Registered from "./components/Registered";
+import Nav from "./components/nav";
+import LoadingClasses from "./components/LoadingClasses";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  
   return  (
     <Route 
       {...rest}
@@ -27,16 +31,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 function App() {
-  const { user } = useSelector(state => state.userReducer.role)
-
-
+ 
   return (
     <div className="App">
       <header className="App-header">
-        <nav>
-          <Link to="/">Log in</Link>
-          <Link to="/signup">Sign up</Link>
-        </nav>
+        <Nav />
       </header>
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} />
@@ -44,6 +43,10 @@ function App() {
         <PrivateRoute path="/search-results" component={SearchResults} />
         <PrivateRoute path="/edit-class" component={EditClass} />
         <PrivateRoute path="/create-class" component={CreateClass} />
+        <PrivateRoute path="/loading-classes" component={LoadingClasses} />
+        <Route path="/registered">
+          <Registered />
+        </Route>
         <Route path="/signup">
           <Signup />
         </Route>

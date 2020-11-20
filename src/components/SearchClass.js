@@ -33,6 +33,7 @@ export default function SearchClass() {
   function searchSubmit(e) {
     e.preventDefault();
     dispatch(searchClass(input))
+    localStorage.setItem("onboarding", "true");
     push("/search-results");
   };
 

@@ -16,24 +16,18 @@ export default function SearchResults() {
   }
 
   function reserveSpot(id) { 
-    // 1) adds to attendees in server class data; 
-    // 2) adds class to server user data & updates user's class list via dispatch action
     let classToAdd = foundClasses.filter(el=>el.id === id);
 
-    // function addToAttendees(id) {
+    // function addToAttendees(id) {// adds one to class.number_attendees in server database
     //   classToAdd[0].attendees++
     //   // Axios.put(`${id}`, {classToAdd[0]})
     // }
-    
-    function addToUser() {
-      axiosWithAuth()
-        .post(`https://bw-back-end.herokuapp.com/api/auth/users/classes/${user.id}/newclass`, {class_id: id})
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    } 
+    axiosWithAuth() //adds class to the client's data on the server for recall on future logins
+      .post(`https://bw-back-end.herokuapp.com/api/auth/users/classes/${user.id}/newclass`, {class_id: id})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
     // addToAttendees();
-    addToUser();
-    dispatch(addClass(classToAdd[0]))
+    dispatch(addClass(classToAdd[0]))//adds class to the client on local state for immediate render
     push("/dashboard");
   }
 

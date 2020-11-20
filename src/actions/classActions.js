@@ -7,6 +7,7 @@ export const SET_EDIT = "SET_EDIT";
 export const EDIT_CLASS = "EDIT_CLASS";
 export const SET_CLASS_LIST = "SET_CLASS_LIST";
 export const FILTER_STATE = "FILTER_STATE";
+export const CLEAR_CLASSES = "CLEAR_CLASSES";
 
 export const addClass = (value) => {
   return {type: ADD_CLASS, payload: value};
@@ -43,4 +44,8 @@ export const setClassList = (value) => {
 
 export const filterState = (value) => {
   return {type: FILTER_STATE, payload: value}
+}
+
+export const clearClasses = () => {
+  return {type: CLEAR_CLASSES}
 }

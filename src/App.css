@@ -46,3 +46,21 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+nav {
+	background-color: white;
+	padding: 0.8%;
+}
+nav a {
+	text-decoration: none;
+	font-size: 1.5rem;
+	color:#3F51B5;
+	font-weight: bold;
+}
+nav div {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 1.5rem;
+	color:#3F51B5;
+	font-weight: bold;
+}
+
