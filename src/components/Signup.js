@@ -60,7 +60,6 @@ const SignUp = () => {
         axios
         .post("https://bw-back-end.herokuapp.com/api/auth/register", newUser)
         .then((res) => {
-            dispatch(addUser(newUser));
             setValues(initialValues);
             push("/registered");
         })

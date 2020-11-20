@@ -15,10 +15,10 @@ export default function Classes(props) {
 
   function clickOnEdit(e, id) {
     // if user is client 1) delete current class from server and user state
-    if (user.role == "client") {
+    if (user.role === "client") {
       let updatedClasses = classes.filter(el => el.id !== id)
-      // Axios.put(`${user.id}`, {...user, classes: updatedClasses})
-      // Axios.put(``)
+      // axiosWithAuth()
+      //   .delete(`https://bw-back-end.herokuapp.com/api/auth/users/classes/savedclasses/${user.id}`)
       dispatch(deleteClass(id));
       push("/search-class");
     }
@@ -30,7 +30,6 @@ export default function Classes(props) {
   
   function deletingClass(e, id) {
     if (user.role === "instructor") {
-      console.log("class to delete", id)
        axiosWithAuth()
       .delete(`https://bw-back-end.herokuapp.com/api/auth/instructor/classes/${id}`)
       .then(res => console.log(res))
@@ -41,7 +40,12 @@ export default function Classes(props) {
 
   return (
     <StyledDiv>
-      <div className= 'className'>{classToEdit.name}</div>
+      <div className="class-info">
+        <p>{classToEdit.name}</p>
+        <p>{classToEdit.date}</p>
+        <p>{classToEdit.time}</p>
+        <p>{classToEdit.time}</p>
+      </div>
       <div><StyleButton onClick={(e) => clickOnEdit(e, classToEdit.id)}>Edit Class</StyleButton> 
       <StyleButton onClick={(e) => deletingClass(e, classToEdit.id)}>{user.role === "instructor" ? "Delete" : "Cancel"} Class</StyleButton>
       </div>
@@ -74,7 +78,7 @@ div{
   width:50%;
   justify-content: space-between;
 }
-.className{
+p{
   font-size:2rem;
 }
 `

@@ -9,21 +9,6 @@ export default function ClassList() {
   const user = useSelector(state => state.userReducer);
   const { push } = useHistory();
 
-  // useEffect(() => {
-  //   if (user.role === "client") {
-  //     function filter() {
-  //       let filtered = []
-  //       filteredClasses.forEach(el => { //refactor: use cs algo method instead of nested loops?
-  //         let tempClass = classes.filter(el2 => el2.id === el.class_id)
-  //         filtered.push(tempClass[0]);
-  //       })
-  //       setUserClasses(filtered);
-  //     }
-  //     filter();
-  //   }
-  // }, [])
-
-  console.log("classList")
   function createOrSearch() {
     if (user.role === "instructor") {
       push("/create-class");
@@ -39,7 +24,6 @@ export default function ClassList() {
   }
 
   if (classes.length > 0) {
-    console.log("classes")
     return (
       <div>
         {user.role === "instructor" ?

@@ -57,12 +57,11 @@ const Login  = () => {
                     role: res.data.user.role,
                     username: res.data.user.username,
                 }
-                console.log("axios success", res.data.message)
+                console.log("push to loading classes inside of axios")
                 dispatch(saveUser(user)) //sets user
+                push("/loading-classes");
             })
-            .catch(err => console.log(err))
-        console.log("push to loading classes outside of axios")
-        push("/loading-classes");
+            .catch(err => console.log("error", err))
     }
 
     return(
