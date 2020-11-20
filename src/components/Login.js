@@ -158,7 +158,7 @@ justify-content: center;
 const StyledInput = Styled.input`
 padding:10px;
 border:0;
-box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
+box-shadow:0 0 15px 5px rgba(0,0,0,0.13);
 margin:10px 0px;  //add top and bottom margin
 width: 100%;
 font-size: 1.5rem;
