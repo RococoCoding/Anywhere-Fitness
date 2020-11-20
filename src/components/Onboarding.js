@@ -10,10 +10,16 @@ export default function Onboarding() {
   const user = useSelector(rootStates => rootStates.userReducer);
   const dispatch = useDispatch();
   const { push } = useHistory();
-
+  
   function pushToDashboard() {
+    // api edit user
+    localStorage.setItem("onboarding", "true");
     dispatch(skipOnboarding());
     push("/dashboard");
+  }
+  if (!user?.role) {
+    console.log("user role onboarding")
+    push("/");
   }
 
   return (

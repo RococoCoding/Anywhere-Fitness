@@ -176,6 +176,15 @@ export default function EditClass() {
             </StyledSelect>
           </label>
           <div>{errors.intensity ? `${errors.intensity}` : ""}</div>
+          <label htmlFor="location">Location
+            <StyledSelect
+              type='text'
+              name='location'
+              value={input.location}
+              onChange={changeHandler}
+            />
+          </label>
+          <div>{errors.location ? `${errors.location}` : ""}</div>
           <label htmlFor="max_size">Max Attendees:
         <StyledInput
               type="number"

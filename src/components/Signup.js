@@ -16,6 +16,7 @@ const initialValues = {
     password: "",
     email: "",
     role: "",
+    signedup: false,
 }
 
 const initialErrors = {
@@ -56,17 +57,15 @@ const SignUp = () => {
     };
 
     const postNewUser = (newUser) => {
-        console.log(newUser)
         axios
         .post("https://bw-back-end.herokuapp.com/api/auth/register", newUser)
         .then((res) => {
             dispatch(addUser(newUser));
             setValues(initialValues);
-            push("/");
+            push("/registered");
         })
         .catch((err) => {
             console.log(err)
-            debugger;
         })
     }
 

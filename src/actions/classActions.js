@@ -5,7 +5,9 @@ export const DELETE_CLASS = "DELETE_CLASS";
 export const SEARCH_CLASS = "SEARCH_CLASS";
 export const SET_EDIT = "SET_EDIT";
 export const EDIT_CLASS = "EDIT_CLASS";
-export const CLEAR_STATE = "CLEAR_STATE";
+export const SET_CLASS_LIST = "SET_CLASS_LIST";
+export const FILTER_STATE = "FILTER_STATE";
+export const CLEAR_CLASSES = "CLEAR_CLASSES";
 
 export const addClass = (value) => {
   return {type: ADD_CLASS, payload: value};
@@ -36,6 +38,14 @@ export const editClassAction = (value) => {
   return {type: EDIT_CLASS, payload: value}
 }
 
-export const clearState = () => {
-  return {type: CLEAR_STATE}
+export const setClassList = (value) => {
+  return {type: SET_CLASS_LIST, payload: value}
+}
+
+export const filterState = (value) => {
+  return {type: FILTER_STATE, payload: value}
+}
+
+export const clearClasses = () => {
+  return {type: CLEAR_CLASSES}
 }

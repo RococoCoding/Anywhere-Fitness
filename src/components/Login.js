@@ -7,7 +7,6 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../actions/userActions";
-import { clearState } from "../actions/classActions";
 
 const initialValues = {
     username: "",
@@ -50,25 +49,28 @@ const Login  = () => {
         Axios.post(`https://bw-back-end.herokuapp.com/api/auth/login`, values)
             .then(res => {
                 localStorage.setItem("token", res.data.token);
+                localStorage.setItem("onboarding", "false");
                 let user = {
                     name: res.data.user.name,
                     email: res.data.user.email,
                     id: res.data.user.id,
                     role: res.data.user.role,
-                    username: res.data.user.username
+                    username: res.data.user.username,
                 }
+                console.log("axios success", res.data.message)
                 dispatch(saveUser(user)) //sets user
-                dispatch(clearState()) //clears class state  -- need to change if loading classes from api 
-                push("/dashboard");
             })
             .catch(err => console.log(err))
+        console.log("push to loading classes outside of axios")
+        push("/loading-classes");
     }
 
     return(
         
         <ContainerDiv>
-            <TopDiv>hello</TopDiv>
+        <div className="top"></div>
         <StyledForm className="logIn-container" onSubmit={submit}>
+            <h1>Log in</h1>
             <StyledLabel>
                 <StyledInput 
                 type="text" 
@@ -105,13 +107,14 @@ display: flex;
 flex-direction: column;
 align-items: center;
 /* border: solid black; */
-`
-
-const TopDiv = Styled.div`
-padding: 20px;
-width: 100%;
-margin-bottom: 1%;
 background-color: #3F51B5;
+h1 {
+    font-size: 2rem;
+    color: black;
+}
+.top {
+    padding: 1%;
+}
 `
 
 const StyledForm = Styled.form`
@@ -120,6 +123,7 @@ flex-direction: column;
 align-items: center;
 width: 30%;
 /* height: 40%; */
+background-color: white;
 box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
 padding: 15%;
 color: red;

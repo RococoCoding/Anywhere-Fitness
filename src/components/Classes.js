@@ -30,11 +30,11 @@ export default function Classes(props) {
   
   function deletingClass(e, id) {
     if (user.role === "instructor") {
+      console.log("class to delete", id)
        axiosWithAuth()
       .delete(`https://bw-back-end.herokuapp.com/api/auth/instructor/classes/${id}`)
       .then(res => console.log(res))
       .catch(err => console.log(err))
-      dispatch(deleteClass(id));
     }
     dispatch(deleteClass(id));
   }

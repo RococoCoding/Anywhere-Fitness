@@ -1,10 +1,13 @@
-import Reac from "react";
+import React from "react";
+import Login from "./Login";
 
 
-
-const Registered = () => {
+export default function Registered() {
 
     return(
-        <h1>Registered</h1>
+        <>
+            <h1>Congratulations! You've been successfully registered. You may now log in.</h1>
+            <Login />
+        </>
     )
 }
