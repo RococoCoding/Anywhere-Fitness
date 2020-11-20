@@ -11,7 +11,6 @@ export default function Dashboard() {
   return (
     <DivContainer>
       <Middlediv>
-        Dashboard
           {onboarded === "false" ? <Onboarding /> : <ClassList />}
       </Middlediv>
     </DivContainer>

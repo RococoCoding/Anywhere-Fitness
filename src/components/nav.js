@@ -21,6 +21,7 @@ export default function Nav() {
       <nav>
         <Link to="/dashboard">Dashboard | </Link>
         <Link to="/create-class">Create Class | </Link>
+        <Link to="/punch-pass">Create Punch Pass | </Link>
         <div onClick={logout}>Logout</div>
       </nav>
     )

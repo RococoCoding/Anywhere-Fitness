@@ -22,6 +22,7 @@ export default function LoadingClasses() {
       if (user.role === "client") { //if user is client and after the classes are set ...
         let doneLoading2 = await axiosWithAuth().get(`https://bw-back-end.herokuapp.com/api/auth/users/classes/savedclasses/${user.id}`)
           .then(res => {
+            console.log(res)
             dispatcher(filterState(res.data.data));
             return false;
           }) //... sets array of ids to classstate.filtered_list

@@ -26,6 +26,7 @@ export default function ClassList() {
   if (classes.length > 0) {
     return (
       <div>
+        Class List
         {user.role === "instructor" ?
           classes.map((el, idx) => {
             console.log("instructor", classes)

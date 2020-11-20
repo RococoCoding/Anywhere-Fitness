@@ -198,62 +198,25 @@ text-align:center;
 label {
   width:30vw;
 }
-div{  
+div {  
   font-size: 1.5rem;
   color:white;
   background-color: red;
-  
+  }
 }
-  
-}
-`
-const StyledInput = Styled.input`
-padding:10px;
-border:.5px solid black;
-box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
-margin:10px 0px;  //add top and bottom margin
-width: 100%;
-font-size: 1.3rem;
-border-radius: 5px;
-`
-const StyledSelect = Styled.select`
-padding:10px;
-box-shadow:0 0 15px 5px rgba(0,0,0,0.06);
-margin:10px 0px;  //add top and bottom margin
-width: 104%;
-font-size: 1rem;
-border:.5px solid black;
-border-radius: 5px;
-
-
-
-
-
 `
 const StyleButton = Styled.button`
 /* remove default behavior */
-appearance:none;
--webkit-appearance:none;
+appearance: none;
+-webkit - appearance: none;
 
 /* usual styles */
-align:center;
-padding:15px;
-border:none;
-background-color:#3F51B5;
+align: center;
+padding: 15px;
+border: none;
+background - color:#3F51B5;
 color:#fff;
-font-weight:600;
-border-radius:7px;
-width:20rem;
-`
-
-const HeaderDiv = Styled.div`
-width:100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-border-bottom: solid black;
-font-size: 3rem;
-margin-bottom: 1rem;
-background-color:#3F51B5;
-color:#fff;
+font - weight: 600;
+border - radius: 7px;
+width: 20rem;
 `
