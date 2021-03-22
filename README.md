@@ -2,7 +2,7 @@
 **Timeline**: One week  
 **Tech**: React, Redux  
 **Description**: Anywhere Fitness makes it painless for Instructors and Clients alike to hold and attend Fitness classes wherever they might be held.    
-**Contribution Type**: School Team Project - State management, routing, authentication
+**Contribution Type**: School Team Project - State management, routing, authentication  
 **Status**: Completed  
 **Retrospective**: For my unit 3 build week project, I was responsible for managing state and connecting the front end with the back end through authenticated routes. I didn't feel very solid on Redux going into build week, so I went into planning-zilla mode. I made a flow chart and everything.  
 ![flowchart showing the relationship between reducers/state and actions and things users should be able to do](https://github.com/RococoCoding/Anywhere-Fitness/blob/main/flowchart.png?raw=true)
