@@ -1,4 +1,4 @@
-# Project 4 - Anywhere Fitness  
+# Anywhere Fitness  
 **Timeline**: One week  
 **Tech**: React, Redux  
 **Description**: Anywhere Fitness makes it painless for Instructors and Clients alike to hold and attend Fitness classes wherever they might be held.    
